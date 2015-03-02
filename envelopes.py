@@ -1,7 +1,6 @@
-#! /usr/bin/python
+#!/usr/bin/python
 
 import random
-import sys
 
 NUM_TRIALS = 10000
 PRIOR_LOWER_MAX = 100
@@ -28,11 +27,7 @@ def multi_trial(cutoff):
   return total_result / NUM_TRIALS
 
 
-def main(argv):
+if __name__ == '__main__':
   """Approximates the expected value for each integral cutoff value."""
   for cutoff in xrange(2 * PRIOR_LOWER_MAX):
     print "cutoff=%s, expected_value=%s" % (cutoff, multi_trial(cutoff))
-
-
-if __name__ == '__main__':
-  sys.exit(main(sys.argv))
