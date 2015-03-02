@@ -38,6 +38,6 @@ func multiTrial(cutoff int) float64 {
 
 func main() {
 	for cutoff := 0; cutoff < 2 * LowerPriorMax; cutoff++ {
-		fmt.Printf("cutoff=%v, expected_value=%0.3f\n", cutoff, multiTrial(cutoff))
+		fmt.Printf("cutoff=%v, expected_value=%v\n", cutoff, multiTrial(cutoff))
 	}
 }
