@@ -23,10 +23,9 @@ multiTrial' (e:es) (l:ls) cutoff = (singleTrial e l cutoff) + (multiTrial' es ls
 
 -- Generates the Monte Carlo approximation of the expected value for each 
 -- possible cutoff value.
-cutoffTrials envelopes lower_values = cutoffTrials' envelopes lower_values 0
-cutoffTrials' envelopes lower_values cutoff
+cutoffTrials envelopes lower_values cutoff
   | cutoff > max_cutoff = []
-  | otherwise           = [(cutoff, expected_value)] ++ cutoffTrials' e_next v_next (cutoff + 1)
+  | otherwise           = [(cutoff, expected_value)] ++ cutoffTrials e_next v_next (cutoff + 1)
   where (e_now, e_next) = splitAt num_trials envelopes
         (v_now, v_next) = splitAt num_trials lower_values
         expected_value  = multiTrial e_now v_now cutoff
@@ -47,5 +46,5 @@ main = do
   let len = num_trials * (max_cutoff + 1)
   envelopes <- randomIntList (0, 1) len
   values <- randomIntList (0, prior_lower_max) len
-  let results = cutoffTrials envelopes values
+  let results = cutoffTrials envelopes values 0
   mapM_ putStrLn (map formatResult results)
