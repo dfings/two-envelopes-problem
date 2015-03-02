@@ -15,21 +15,21 @@ singleTrial envelope lower_value cutoff =
 	      else (higher_value, lower_value)
 
 -- Runs multiple trials to do Monte Carlo approximation of the expected value.
-multiTrial envelopes lower_values cutoff = multiTrial' envelopes lower_values cutoff 0 0
-multiTrial' [] [] _ total_value total_trials = fromIntegral total_value / fromIntegral total_trials	
-multiTrial' (e:es) (l:ls) cutoff total_value total_trials =
-    multiTrial' es ls cutoff (total_value + new_value) (total_trials + 1)
-    where new_value = singleTrial e l cutoff
+multiTrial envelopes lower_values cutoff = total_expected_value / total_runs
+    where total_expected_value = fromIntegral (multiTrial' envelopes lower_values cutoff) 
+          total_runs           = fromIntegral (length envelopes)
+multiTrial' [] [] _ = 0
+multiTrial' (e:es) (l:ls) cutoff = (singleTrial e l cutoff) + (multiTrial' es ls cutoff)
 
 -- Generates the Monte Carlo approximation of the expected value for each 
 -- possible cutoff value.
 cutoffTrials envelopes lower_values = cutoffTrials' envelopes lower_values 0
 cutoffTrials' envelopes lower_values cutoff
-  | cutoff == max_cutoff = [(cutoff, multiTrial envelopes lower_values max_cutoff)]
-  | otherwise            = [(cutoff, multiTrial e_now v_now cutoff)] ++
-                           cutoffTrials' e_next v_next (cutoff + 1)
+  | cutoff > max_cutoff = []
+  | otherwise           = [(cutoff, expected_value)] ++ cutoffTrials' e_next v_next (cutoff + 1)
   where (e_now, e_next) = splitAt num_trials envelopes
         (v_now, v_next) = splitAt num_trials lower_values
+        expected_value  = multiTrial e_now v_now cutoff
 
 -- Formats the output of cutoffTrials.
 formatResult (cutoff, expected_value) = 
