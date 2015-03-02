@@ -37,15 +37,15 @@ formatResult (cutoff, expected_value) =
 
 -- Generates a new random integer list of a given length inside the given 
 -- bounds.
-randomIntList bounds length = do
+randomIntList bounds len = do
   g <- newStdGen
-  return (take length (randomRs bounds g :: [Int]))
+  return (take len (randomRs bounds g :: [Int]))
 
 -- Runs the Monte Carlo approximation for each possible cutoff using a randomly
 -- generated input sequence of envelope choices and values.
 main = do
-  let length = num_trials * (max_cutoff + 1)
-  envelopes <- randomIntList (0, 1) length
-  values <- randomIntList (0, prior_lower_max) length
+  let len = num_trials * (max_cutoff + 1)
+  envelopes <- randomIntList (0, 1) len
+  values <- randomIntList (0, prior_lower_max) len
   let results = cutoffTrials envelopes values
   mapM_ putStrLn (map formatResult results)
