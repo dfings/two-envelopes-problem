@@ -11,8 +11,8 @@ singleTrial envelope lower_value cutoff =
   if value >= cutoff then value else other
   where higher_value = 2 * lower_value
         (value, other) = if envelope == 0 
-	      then (lower_value, higher_value) 
-	      else (higher_value, lower_value)
+          then (lower_value, higher_value) 
+          else (higher_value, lower_value)
 
 -- Runs multiple trials to do Monte Carlo approximation of the expected value.
 -- Surprisingly, a tail recursive version of this is much slower.
@@ -39,7 +39,7 @@ cutoffTrials cutoff = do
     putStrLn ("cutoff=" ++ show cutoff ++ ", expected_value=" ++ show expected_value)
     cutoffTrials (cutoff + 1)
   else
-	return ()
+    return ()
 
 -- Runs the Monte Carlo approximation for each possible cutoff using a randomly
 -- generated input sequence of envelope choices and values.
