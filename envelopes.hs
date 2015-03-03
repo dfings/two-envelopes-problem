@@ -16,12 +16,10 @@ singleTrial envelope lower_value cutoff =
 
 -- Runs multiple trials to do Monte Carlo approximation of the expected value.
 -- Surprisingly, a tail recursive version of this is much slower.
-multiTrial envelopes lower_values cutoff = total_expected_value / total_runs
+multiTrial envelopes lower_values cutoff = total_expected_value / fromIntegral num_trials
     where total_expected_value = fromIntegral (multiTrial' envelopes lower_values cutoff) 
-          total_runs           = fromIntegral (length envelopes)
           multiTrial' [] [] _ = 0
           multiTrial' (e:es) (l:ls) cutoff = (singleTrial e l cutoff) + (multiTrial' es ls cutoff)
-
 
 -- Generates a new random integer list of a given length inside the given 
 -- bounds.

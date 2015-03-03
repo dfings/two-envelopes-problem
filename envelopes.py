@@ -13,10 +13,9 @@ def single_trial(cutoff):
   the value of the envelope it ultimately selects.
   """
   lower_envelope = random.random() * PRIOR_LOWER_MAX
-  higher_envelope = 2 * lower_envelope
-  y = random.choice([lower_envelope, higher_envelope])
-  x = higher_envelope if y == lower_envelope else lower_envelope
-  return y if y >= cutoff else x
+  envelopes = [lower_envelope, 2 * lower_envelope]
+  random.shuffle(envelopes)
+  return envelopes[0] if envelopes[0] >= cutoff else envelopes[1]
 	
 		
 def multi_trial(cutoff):
