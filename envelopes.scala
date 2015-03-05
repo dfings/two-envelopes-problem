@@ -16,8 +16,12 @@ object Envelopes {
    */
   def singleTrial(cutoff: Int) : Int = {
     val lowerValue = random.nextInt(PRIOR_LOWER_MAX)
-    val envelopes = random.shuffle(Vector(lowerValue, 2 * lowerValue))
-    return if (envelopes(0) >= cutoff) envelopes(0) else envelopes(1)
+    val higherValue = 2 * lowerValue
+    if (random.nextInt(2) == 0) {
+      if (lowerValue >= cutoff) lowerValue else higherValue
+    } else { 
+      if (higherValue >= cutoff) higherValue else lowerValue
+    }
   }
 
   /** Runs many trials at a given cutoff to approximate the expected value. */
