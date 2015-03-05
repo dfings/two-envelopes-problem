@@ -1,17 +1,19 @@
 -module(envelopes).
 -export([main/0]).
 
+% Helper to generate the [picked, other] list for a given run.
+get_trial_values(Envelope, LowerValue) ->
+  Values = [LowerValue, 2 * LowerValue],
+  if (Envelope == 1) -> Values; true -> lists:reverse(Values) end.
+
 % Returns the result of a single trial. We switch if the value is below the
 % cutoff.
 single_trial(Cutoff, PriorLowerMax) ->
-  LowerValue = random:uniform() * PriorLowerMax,
-  Envelopes = {LowerValue, 2 * LowerValue},
-  Envelope = random:uniform(2),  % [1, 2]
+  Values = get_trial_values(random:uniform(2), random:uniform() * PriorLowerMax),
+  Choice = lists:nth(1, Values),
   if 
-    element(Envelope, Envelopes) >= Cutoff ->
-      element(Envelope, Envelopes);
-    true -> 
-      element(3 - Envelope, Envelopes)  % Erlang is 1-indexed
+    Choice >= Cutoff -> Choice;
+    true -> lists:nth(2, Values) % Erlang is 1-indexed
   end.
   
 % Returns the total value of all of the trials for a given cutoff level.   
