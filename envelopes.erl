@@ -4,17 +4,14 @@
 % Helper to generate the [picked, other] list for a given run.
 get_trial_values(Envelope, LowerValue) ->
   Values = [LowerValue, 2 * LowerValue],
-  if (Envelope == 1) -> Values; true -> lists:reverse(Values) end.
+  if Envelope == 1 -> Values; true -> lists:reverse(Values) end.
 
 % Returns the result of a single trial. We switch if the value is below the
 % cutoff.
 single_trial(Cutoff, PriorLowerMax) ->
   Values = get_trial_values(random:uniform(2), random:uniform() * PriorLowerMax),
   Choice = lists:nth(1, Values),
-  if 
-    Choice >= Cutoff -> Choice;
-    true -> lists:nth(2, Values) % Erlang is 1-indexed
-  end.
+  if Choice >= Cutoff -> Choice; true -> lists:nth(2, Values) end.
   
 % Returns the total value of all of the trials for a given cutoff level.   
 get_multi_trial_total(_, _, 0, Total) -> Total;
