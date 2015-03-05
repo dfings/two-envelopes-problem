@@ -1,3 +1,7 @@
+-- $ runhaskell envelopes.hs
+-- or
+-- $ ghc -o envelopes_hs envelopes.hs; ./envelopes_hs
+
 import System.Random
 
 num_trials = 10000

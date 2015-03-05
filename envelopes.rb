@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 NUM_TRIALS = 10000
 PRIOR_LOWER_MAX = 100
 

@@ -1,3 +1,6 @@
+// $ javac -cp . Envelopes.java
+// $ java -cp . Envelopes
+
 import java.util.Random;
 
 /** Monte Carlo simulation of the two envelopes problem. */
@@ -7,10 +10,12 @@ public final class Envelopes {
   private static final int LOWER_PRIOR_MAX = 100;
   private static final Random random = new Random();
  
-  // Runs a single trial where an envelope is chosen.  If the chosen envelope has
-  // a value < cutoff, the function will switch envelopes, otherwise it will keep
-  // the envelope it has chosen. Returns the value of the envelope it ultimately 
-  // selects.
+  /**
+   * Runs a single trial where an envelope is chosen.  If the chosen envelope has
+   * a value &lt; cutoff, the function will switch envelopes, otherwise it will keep
+   * the envelope it has chosen. Returns the value of the envelope it ultimately 
+   * selects.
+   */
   private static double singleTrial(int cutoff) {
     double lowerValue = random.nextDouble() * LOWER_PRIOR_MAX;
     double higherValue = 2 * lowerValue;
@@ -21,7 +26,7 @@ public final class Envelopes {
     }  
   }
   
-  // Runs many trials at a given cutoff to approximate the expected value.
+  /** Runs many trials at a given cutoff to approximate the expected value. */
   private static double multiTrial(int cutoff) {
     double total = 0;
     for (int i = 0; i < NUM_TRIALS; ++i) {

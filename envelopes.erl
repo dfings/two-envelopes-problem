@@ -1,3 +1,7 @@
+% $ erl
+% 1> c(envelopes).
+% 2> envelopes:main().
+
 -module(envelopes).
 -export([main/0]).
 

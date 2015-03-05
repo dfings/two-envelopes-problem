@@ -1,3 +1,6 @@
+// clang -stdlib=libstdc++ -std=c++11 envelopes.cc -O3 -v -o envelopes_cc
+// ./envelopes_cc
+
 #include <stdio.h>
 #include <random>
 #include <time.h>

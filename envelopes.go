@@ -1,3 +1,7 @@
+// $ go run envelopes.go
+// or
+// $ go build envelopes.go; ./envelopes
+
 package main
 
 import (

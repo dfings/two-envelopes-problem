@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var NUM_TRIALS = 10000;
 var PRIOR_LOWER_MAX = 100;
 

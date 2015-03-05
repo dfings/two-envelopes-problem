@@ -1,3 +1,5 @@
+// $  ~/GitHub/scala-2.11.5/bin/scala envelopes.scala
+
 import scala.util.Random
 
 /** Monte Carlo simulation of the two envelopes problem. */
