@@ -13,7 +13,7 @@ const int kLowerPriorMax = 100;
 // the envelope it has chosen. Returns the value of the envelope it ultimately 
 // selects.
 double SingleTrial(int cutoff) {
-  double lower_value = ((double) rand() / (RAND_MAX));
+  double lower_value = kLowerPriorMax * ((double) rand() / (RAND_MAX));
   double higher_value = 2 * lower_value;
   if (rand() % 2 == 0) {
     return lower_value >= cutoff ? lower_value : higher_value;
