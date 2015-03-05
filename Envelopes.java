@@ -19,7 +19,7 @@ public final class Envelopes {
   private static double singleTrial(int cutoff) {
     double lowerValue = random.nextDouble() * LOWER_PRIOR_MAX;
     double higherValue = 2 * lowerValue;
-    if (random.nextInt(2) % 2 == 0) {
+    if (random.nextInt(2) == 0) {
       return lowerValue >= cutoff ? lowerValue : higherValue;
     } else {
       return higherValue >= cutoff ? higherValue : lowerValue;
