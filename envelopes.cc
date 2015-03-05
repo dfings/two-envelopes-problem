@@ -2,24 +2,20 @@
 // ./envelopes_cc
 
 #include <stdio.h>
-#include <random>
 #include <time.h>
+#include <cstdlib>
 
 const int kNumTrials = 10000;
 const int kLowerPriorMax = 100;
-
-// Initialize random number generators.
-std::mt19937 gen(time(NULL));
-std::uniform_real_distribution<> value_distribution(0, kLowerPriorMax);
 
 // Runs a single trial where an envelope is chosen.  If the chosen envelope has
 // a value < cutoff, the function will switch envelopes, otherwise it will keep
 // the envelope it has chosen. Returns the value of the envelope it ultimately 
 // selects.
 double SingleTrial(int cutoff) {
-  double lower_value = value_distribution(gen);
+  double lower_value = ((double) rand() / (RAND_MAX));
   double higher_value = 2 * lower_value;
-  if (gen() % 2 == 0) {
+  if (rand() % 2 == 0) {
     return lower_value >= cutoff ? lower_value : higher_value;
   } else {
     return higher_value >= cutoff ? higher_value : lower_value;
@@ -36,6 +32,7 @@ double MultiTrial(int cutoff) {
 }
 
 int main(int argc, char* argv[]) {
+  srand(time(NULL));
   for (int cutoff = 0; cutoff < 2 * kLowerPriorMax; ++cutoff) {
     printf("cutoff=%d, expected_value=%f\n", cutoff, MultiTrial(cutoff));
   }
