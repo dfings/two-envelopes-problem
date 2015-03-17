@@ -21,7 +21,7 @@ single_trial() {
 
   lower_envelope_int=`ceil $lower_envelope`
   higher_envelope_int=`ceil $higher_envelope`
-  if [[ ( $envelope -eq 0 && $lower_envelope_int -gt $1 ) ||\
+  if [[ ( $envelope -eq 0 && $lower_envelope_int -gt $1 ) || 
         ( $envelope -eq 1 && $higher_envelope_int -lt $1 ) ]]; then
     echo $lower_envelope
   else
