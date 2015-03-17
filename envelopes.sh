@@ -1,28 +1,20 @@
 #!/bin/sh
 
 # Shell scripting is super slow at this.
-NUM_TRIALS=100
+NUM_TRIALS=10000
 PRIOR_LOWER_MAX=100
-
-ceil() {
-  # Incorrect at the integral values, but who cares?
-  floor=`printf "%.0f\n" "$@"`
-  echo "$((floor+1))"
-}
 
 # Runs a single trial where an envelope is chosen.  If the chosen envelope has
 # a value < cutoff, the function will switch envelopes, otherwise it will keep
 # the envelope it has chosen. Returns the value of the envelope it ultimately 
 # selects.
 single_trial() {
-  lower_envelope=`echo "$PRIOR_LOWER_MAX * $RANDOM / 32767" | bc -l`
-  higher_envelope=`echo "$lower_envelope * 2" | bc -l`
+  lower_envelope=$((RANDOM%PRIOR_LOWER_MAX))
+  higher_envelope=$((lower_envelope*2))
   envelope=$((RANDOM%2))
 
-  lower_envelope_int=`ceil $lower_envelope`
-  higher_envelope_int=`ceil $higher_envelope`
-  if [[ ( $envelope -eq 0 && $lower_envelope_int -gt $1 ) || 
-        ( $envelope -eq 1 && $higher_envelope_int -lt $1 ) ]]; then
+  if [[ ( $envelope -eq 0 && $lower_envelope -gt $1 ) || 
+        ( $envelope -eq 1 && $higher_envelope -lt $1 ) ]]; then
     echo $lower_envelope
   else
     echo $higher_envelope
@@ -35,9 +27,9 @@ multi_trial() {
   total_result="0"
   for _ in $(seq 0 $NUM_TRIALS_MAX); do
     result=`single_trial $1`
-    total_result=`echo "$total_result + $result" | bc -l`
+    total_result=$((total_result+result))
   done
-  echo "$total_result / $NUM_TRIALS" | bc -l
+  echo "scale=5; $total_result / $NUM_TRIALS" | bc
 }
 
 CUTOFF_MAX=$((2*PRIOR_LOWER_MAX-1))
