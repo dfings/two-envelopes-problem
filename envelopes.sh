@@ -18,8 +18,8 @@ for cutoff in $(seq 0 $CUTOFF_MAX); do
     higher_envelope=$((lower_envelope*2))
     envelope=$((RANDOM%2))
 
-    if [[ ( $envelope -eq 0 && $lower_envelope -gt $1 ) || 
-          ( $envelope -eq 1 && $higher_envelope -lt $1 ) ]]; then
+    if [[ ( $envelope -eq 0 && $lower_envelope -gt $cutoff ) || 
+          ( $envelope -eq 1 && $higher_envelope -lt $cutoff ) ]]; then
       total_result=$((total_result+lower_envelope))
     else
       total_result=$((total_result+higher_envelope))
