@@ -15,8 +15,8 @@ ceil() {
 # the envelope it has chosen. Returns the value of the envelope it ultimately 
 # selects.
 single_trial() {
-  lower_envelope=`echo "scale=10; $PRIOR_LOWER_MAX * $RANDOM / 32767" | bc`
-  higher_envelope=`echo "scale=10; $lower_envelope * 2" | bc`
+  lower_envelope=`echo "$PRIOR_LOWER_MAX * $RANDOM / 32767" | bc -l`
+  higher_envelope=`echo "$lower_envelope * 2" | bc -l`
   envelope=$((RANDOM%2))
 
   lower_envelope_int=`ceil $lower_envelope`
@@ -35,9 +35,9 @@ multi_trial() {
   total_result="0"
   for _ in $(seq 0 $NUM_TRIALS_MAX); do
     result=`single_trial $1`
-    total_result=`echo "scale=10; $total_result + $result" | bc`
+    total_result=`echo "$total_result + $result" | bc -l`
   done
-  echo "scale=10; $total_result / $NUM_TRIALS" | bc
+  echo "$total_result / $NUM_TRIALS" | bc -l
 }
 
 CUTOFF_MAX=$((2*PRIOR_LOWER_MAX-1))
