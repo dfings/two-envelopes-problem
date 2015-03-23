@@ -1,4 +1,7 @@
 // $ ~/GitHub/scala-2.11.5/bin/scala envelopes.scala
+// or
+// $ ~/GitHub/scala-2.11.5/bin/scalac envelopes.scala
+// $ ~/GitHub/scala-2.11.5/bin/scala Envelopes
 
 import scala.util.Random
 
