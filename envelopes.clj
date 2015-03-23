@@ -1,4 +1,4 @@
-;; java -cp ~/GitHub/clojure-1.6.0/clojure-1.6.0.jar clojure.main
+;; $ java -cp ~/GitHub/clojure-1.6.0/clojure-1.6.0.jar clojure.main
 ;; user=> (load-file "envelopes.clj")
 
 (def NUM_TRIALS 10000)

@@ -1,5 +1,5 @@
-// clang -std=c++11 envelopes.cc -O3 -o envelopes_cc
-// ./envelopes_cc
+// $ clang -std=c++11 envelopes.cc -O3 -o envelopes_cc
+// $ ./envelopes_cc
 
 #include <cstdio>
 #include <cstdlib>
