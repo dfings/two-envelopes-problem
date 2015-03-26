@@ -1,3 +1,6 @@
+% $ erl -compile envelopes
+% $ erl -noshell -s envelopes main -s init stop
+% or
 % $ erl
 % 1> c(envelopes).
 % 2> envelopes:main().
