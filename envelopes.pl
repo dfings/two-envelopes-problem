@@ -14,8 +14,7 @@ sub single_trial {
   my $cutoff = $_[0];
   my $lower_value = $PRIOR_LOWER_MAX * rand();  
   my $higher_value = 2 * $lower_value;
-  my $envelope = int(rand(2));
-  if ($envelope == 0) {
+  if (int(rand(2)) == 0) {
     return $lower_value >= $cutoff ? $lower_value : $higher_value;
   } else {
     return $higher_value >= $cutoff ? $higher_value : $lower_value;

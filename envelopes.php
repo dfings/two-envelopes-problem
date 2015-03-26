@@ -12,8 +12,7 @@ function single_trial($cutoff) {
   global $PRIOR_LOWER_MAX;
   $lower_value = $PRIOR_LOWER_MAX * (float) rand() / (float) getrandmax();  
   $higher_value = 2 * $lower_value;
-  $envelope = rand(0, 1);
-  if ($envelope == 0) {
+  if (rand(0, 1) == 0) {
     return $lower_value >= $cutoff ? $lower_value : $higher_value;
   } else {
     return $higher_value >= $cutoff ? $higher_value : $lower_value;
