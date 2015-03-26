@@ -1,3 +1,5 @@
+;; $ java -cp ~/GitHub/clojure-1.6.0/clojure-1.6.0.jar clojure.main envelopes.cl
+;; or 
 ;; $ java -cp ~/GitHub/clojure-1.6.0/clojure-1.6.0.jar clojure.main
 ;; user=> (load-file "envelopes.clj")
 
