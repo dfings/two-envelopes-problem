@@ -9,9 +9,13 @@ var PRIOR_LOWER_MAX = 100;
 // selects.
 function singleTrial(cutoff) {
   var lower_value = Math.random() * PRIOR_LOWER_MAX;
-  var envelopes = [lower_value, 2 * lower_value];
+  var higher_value = 2 * lower_value;
   var choice = Math.floor(Math.random() * 2);
-  return envelopes[choice] >= cutoff ? envelopes[choice] : envelopes[1 - choice];
+  if (choice == 0) {
+    return lower_value >= cutoff ? lower_value : higher_value;
+  } else {
+    return higher_value >= cutoff ? higher_value : lower_value;
+  }
 }
 
 // Runs many trials at a given cutoff to approximate the expected value.
