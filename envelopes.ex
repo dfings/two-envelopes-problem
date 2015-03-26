@@ -1,3 +1,4 @@
+# $ brew install elixir
 # $ elixir -r envelopes.ex -e 'Envelopes.main'
 # or
 # $ iex

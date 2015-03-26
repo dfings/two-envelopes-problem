@@ -1,7 +1,8 @@
-// $ ~/GitHub/scala-2.11.5/bin/scala envelopes.scala
+// $ brew install scala
+// $ scala envelopes.scala
 // or
-// $ ~/GitHub/scala-2.11.5/bin/scalac envelopes.scala
-// $ ~/GitHub/scala-2.11.5/bin/scala Envelopes
+// $ scalac envelopes.scala
+// $ scala Envelopes
 
 import scala.util.Random
 
