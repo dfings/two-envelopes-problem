@@ -1,3 +1,4 @@
+% $ brew install erlang
 % $ erl -compile envelopes
 % $ erl -noshell -s envelopes main -s init stop
 % or
