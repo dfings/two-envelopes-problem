@@ -1,7 +1,6 @@
 #!/usr/bin/env php
 
 <?php
-
 $PRIOR_LOWER_MAX = 100;
 $NUM_TRIALS = 10000;
 
