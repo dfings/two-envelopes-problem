@@ -9,6 +9,7 @@
 Random.self_init();;
 
 let num_trials = 10000
+let num_trials_f = float_of_int num_trials
 let prior_lower_max = 100
 
 (* Returns the result of a single trial. We switch if the value is below the
@@ -28,15 +29,16 @@ let rec get_multi_trial_total cutoff i total =
     get_multi_trial_total cutoff (i + 1) (total +. single_trial cutoff)
   else total;;
 
+(* Computes the average value among many trials. *)
+let rec multi_trial cutoff =
+  let cutoff_f = float_of_int cutoff in
+  (get_multi_trial_total cutoff_f 0 0.) /. num_trials_f;;
+
 (* Prints the expected value for each possible cutoff. *)
 let rec cutoff_trials cutoff =
-  let num_trials_f = float_of_int num_trials
-  and cutoff_f = float_of_int cutoff in
   if cutoff <= 2 * prior_lower_max then begin
-    Printf.printf "cutoff=%d, expected_value=%f\n"
-      cutoff
-      ((get_multi_trial_total cutoff_f 0 0.) /. num_trials_f);
-    cutoff_trials (cutoff + 1);
+    Printf.printf "cutoff=%d, expected_value=%f\n" cutoff (multi_trial cutoff);
+    cutoff_trials (cutoff + 1)
   end
   else ();;
 
