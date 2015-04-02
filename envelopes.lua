@@ -27,6 +27,5 @@ function multi_trial(cutoff)
 end
 
 for cutoff=0,2*PRIOR_LOWER_MAX,1 do
-  io.write(string.format("cutoff=%d, expected_value=%f\n",
-                         cutoff, multi_trial(cutoff)))
+  io.write(string.format("cutoff=%d, expected_value=%f\n", cutoff, multi_trial(cutoff)))
 end
