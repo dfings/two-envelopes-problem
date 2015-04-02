@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 
-NUM_TRIALS=10000
+NUM_TRIALS = 10000
 PRIOR_LOWER_MAX = 100
 
 -- Runs a single trial where an envelope is chosen.  If the chosen envelope has
