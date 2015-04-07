@@ -1,9 +1,9 @@
-// $ clang -std=c++11 envelopes.cc -O3 -o envelopes_cc
+// $ clang envelopes.cc -O3 -o envelopes_cc
 // $ ./envelopes_cc
 
-#include <cstdio>
-#include <cstdlib>
-#include <ctime>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 const int kNumTrials = 10000;
 const int kLowerPriorMax = 100;
