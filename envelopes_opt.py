@@ -2,15 +2,16 @@
 
 import random
 
-NUM_TRIALS = 10000
+NUM_TRIALS = 20000
 PRIOR_LOWER_MAX = 100
 		
 def multi_trial(cutoff):
   """Runs many trials at a given cutoff to approximate the expected value."""
   randfloat = random.random
+  prior_lower_max = PRIOR_LOWER_MAX
   total_result = 0
   for _ in xrange(NUM_TRIALS):
-    lower_value = randfloat() * PRIOR_LOWER_MAX
+    lower_value = randfloat() * prior_lower_max
     if randfloat() * 2 < 1:
       if lower_value >= cutoff:
         total_result = total_result + lower_value
