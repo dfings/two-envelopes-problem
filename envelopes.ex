@@ -33,12 +33,13 @@ defmodule Envelopes do
   def cutoff_trials(cutoff) do
     if cutoff <= 2 * @prior_lower_max do
       expected_value = get_multi_trial_total(cutoff, 0, 0) / @num_trials
-      IO.puts :io.format("cutoff=~w, expected_value=~w~n", [cutoff, expected_value])
+      IO.puts :io_lib.format("cutoff=~w, expected_value=~w", [cutoff, expected_value])
       cutoff_trials(cutoff + 1)
     end
   end
 
   def main do
+    :random.seed(:erlang.now)
     cutoff_trials(0)
   end
 end
