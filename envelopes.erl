@@ -40,4 +40,6 @@ cutoff_trials(Cutoff, Remaining) ->
   io:format("cutoff=~w, expected_value=~w~n", [Cutoff, ExpectedValue]),
   cutoff_trials(Cutoff + 1, Remaining - 1).
       
-main() -> cutoff_trials(0, 2 * prior_lower_max() + 1).
+main() -> 
+  random:seed(now()),
+  cutoff_trials(0, 2 * prior_lower_max() + 1).
