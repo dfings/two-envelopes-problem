@@ -2,7 +2,7 @@
 
 import random
 
-NUM_TRIALS = 20000
+NUM_TRIALS = 10000
 PRIOR_LOWER_MAX = 100
 		
 def multi_trial(cutoff):
