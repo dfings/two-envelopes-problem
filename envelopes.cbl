@@ -62,7 +62,7 @@ PROCEDURE DIVISION.
 
    RNG.
    *> FUNCTION RANDOM produces a non-uniform distribution.
-   *> So ignore to first 5 digits it produces.
+   *> So ignore the first 5 digits it produces.
    COMPUTE WS-RNG = FUNCTION RANDOM.
    COMPUTE WS-TMP = WS-RNG * 10000.
    COMPUTE WS-RNG = WS-RNG * 10000 - WS-TMP.
