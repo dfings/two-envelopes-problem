@@ -24,7 +24,7 @@ PROCEDURE DIVISION.
   MAIN.
   *> Approximates the expected value for each integral cutoff value.
   PERFORM MULTI-TRIAL VARYING WS-CUTOFF 
-      FROM 0 BY 1 UNTIL WS-CUTOFF>2*WS-PRIOR-LOWER-MAX.
+      FROM 0 BY 1 UNTIL WS-CUTOFF > 2 * WS-PRIOR-LOWER-MAX.
   STOP RUN.
 
   MULTI-TRIAL.
