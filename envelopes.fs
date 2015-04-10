@@ -17,10 +17,10 @@ let single_trial cutoff =
   let lower_value = rng.NextDouble() * prior_lower_max_f
   let higher_value = 2.0 * lower_value
   let choice = rng.Next(0, 2)
-  let value, other = (if choice = 0 
-                      then (lower_value, higher_value)
-                      else (higher_value, lower_value))
-  if value >= cutoff then value else other
+  if choice = 0 then
+    if lower_value >= cutoff then lower_value else higher_value
+  else
+    if higher_value >= cutoff then higher_value else lower_value
 
 (* Returns the total value of all of the trials for a given cutoff level. *)
 let rec get_multi_trial_total cutoff i total =

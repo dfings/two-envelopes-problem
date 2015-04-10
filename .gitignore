@@ -1,2 +1,8 @@
 
 *.beam
+
+*.exe
+
+*.cmi
+
+*.cmo
