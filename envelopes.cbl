@@ -1,66 +1,66 @@
 *> $ brew install open-cobol
 *> $ cobc -I/Users/$USER/homebrew/include -L/Users/$USER/homebrew/lib -free -x -o envelopes_cbl envelopes.cbl
 
-IDENTIFICATION DIVISION.
-PROGRAM-ID. ENVELOPES.
+identification division.
+program-id. envelopes.
 
-DATA DIVISION.
-  WORKING-STORAGE SECTION.
+data division.
+  working-storage section.
   *> Constants
-  01 WS-NUM-TRIALS PIC 9(5) VALUE 10000.
-  01 WS-PRIOR-LOWER-MAX PIC 9(3) VALUE 100.
+  01 ws-num-trials pic 9(5) value 10000.
+  01 ws-prior-lower-max pic 9(3) value 100.
   *> Variables
-  01 WS-CUTOFF PIC 9(3).
-  01 WS-TOTAL COMP-2.
-  01 WS-TRIAL-NUM PIC 9(5).
-  01 WS-EXPECTED-VALUE COMP-2.
-  01 WS-LOWER-VALUE COMP-2.
-  01 WS-HIGHER-VALUE COMP-2.
+  01 ws-cutoff pic 9(3).
+  01 ws-total comp-2.
+  01 ws-trial-num pic 9(5).
+  01 ws-expected-value comp-2.
+  01 ws-lower-value comp-2.
+  01 ws-higher-value comp-2.
   *> RNG support
-  01 WS-RNG COMP-2.
-  01 WS-TMP PIC 9(4).
+  01 ws-rng comp-2.
+  01 ws-tmp pic 9(4).
 
-PROCEDURE DIVISION.
-  MAIN.
+procedure division.
+  main.
   *> Approximates the expected value for each integral cutoff value.
-  PERFORM MULTI-TRIAL VARYING WS-CUTOFF 
-      FROM 0 BY 1 UNTIL WS-CUTOFF > 2 * WS-PRIOR-LOWER-MAX.
-  STOP RUN.
+  perform multi-trial varying ws-cutoff 
+      from 0 by 1 until ws-cutoff > 2 * ws-prior-lower-max.
+  stop run.
 
-  MULTI-TRIAL.
+  multi-trial.
   *> Runs many trials at a given cutoff to approximate the expected value.
-  COMPUTE WS-TOTAL = 0.
-  PERFORM SINGLE-TRIAL VARYING WS-TRIAL-NUM 
-      FROM 1 BY 1 UNTIL WS-TRIAL-NUM > WS-NUM-TRIALS.
-  COMPUTE WS-EXPECTED-VALUE = WS-TOTAL / WS-NUM-TRIALS
-  DISPLAY 'cutoff='WS-CUTOFF', expected_value='WS-EXPECTED-VALUE.
+  move zero to ws-total.
+  perform single-trial varying ws-trial-num 
+      from 1 by 1 until ws-trial-num > ws-num-trials.
+  divide ws-total by ws-num-trials giving ws-expected-value.
+  display 'cutoff='ws-cutoff', expected_value='ws-expected-value.
 
-  SINGLE-TRIAL.
+  single-trial.
   *> Runs a single trial where an envelope is chosen.  If the chosen envelope 
   *> has a value < cutoff, the function will switch envelopes, otherwise it 
   *> will keep the envelope it has chosen. Returns the value of the envelope 
   *> it ultimately selects.
-  PERFORM RNG.
-  COMPUTE WS-LOWER-VALUE = WS-RNG * WS-PRIOR-LOWER-MAX.
-  COMPUTE WS-HIGHER-VALUE = 2 * WS-LOWER-VALUE
-  PERFORM RNG.
-  IF WS-RNG < 0.5 THEN 
-    IF WS-LOWER-VALUE >= WS-CUTOFF THEN
-      COMPUTE WS-TOTAL = WS-TOTAL + WS-LOWER-VALUE
-    ELSE
-      COMPUTE WS-TOTAL = WS-TOTAL + WS-HIGHER-VALUE
-    END-IF
-  ELSE
-    IF WS-HIGHER-VALUE >= WS-CUTOFF THEN
-      COMPUTE WS-TOTAL = WS-TOTAL + WS-HIGHER-VALUE
-    ELSE
-      COMPUTE WS-TOTAL = WS-TOTAL + WS-LOWER-VALUE
-    END-IF  
-  END-IF.
+  perform rng.
+  multiply ws-rng by ws-prior-lower-max giving ws-lower-value.
+  multiply ws-lower-value by 2 giving ws-higher-value.
+  perform rng.
+  if ws-rng < 0.5 then 
+    if ws-lower-value >= ws-cutoff then
+      add ws-lower-value to ws-total
+    else
+      add ws-higher-value to ws-total
+    end-if
+  else
+    if ws-higher-value >= ws-cutoff then
+      add ws-higher-value to ws-total
+    else
+      add ws-lower-value to ws-total
+    end-if  
+  end-if.
 
-  RNG.
-  *> FUNCTION RANDOM produces a non-uniform distribution.
+  rng.
+  *> function random produces a non-uniform distribution.
   *> So ignore the first 5 digits it produces.
-  COMPUTE WS-RNG = FUNCTION RANDOM.
-  COMPUTE WS-TMP = WS-RNG * 10000.
-  COMPUTE WS-RNG = WS-RNG * 10000 - WS-TMP.
+  compute ws-rng = function random.
+  compute ws-tmp = ws-rng * 10000.
+  compute ws-rng = ws-rng * 10000 - ws-tmp.
