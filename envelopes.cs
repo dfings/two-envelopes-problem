@@ -7,8 +7,8 @@ using System;
 /** Monte Carlo simulation of the two envelopes problem. */
 public sealed class Envelopes {
  
-  private const int NUM_TRIALS = 10000;
-  private const int LOWER_PRIOR_MAX = 100;
+  private const int NumTrials = 10000;
+  private const int LowerPriorMax = 100;
   private static readonly Random random = new Random();
  
   /**
@@ -18,7 +18,7 @@ public sealed class Envelopes {
    * selects.
    */
   private static double SingleTrial(int cutoff) {
-    double lowerValue = random.NextDouble() * LOWER_PRIOR_MAX;
+    double lowerValue = random.NextDouble() * LowerPriorMax;
     double higherValue = 2 * lowerValue;
     if (random.Next(2) == 0) {
       return lowerValue >= cutoff ? lowerValue : higherValue;
@@ -30,14 +30,14 @@ public sealed class Envelopes {
   /** Runs many trials at a given cutoff to approximate the expected value. */
   private static double MultiTrial(int cutoff) {
     double total = 0;
-    for (int i = 0; i < NUM_TRIALS; ++i) {
+    for (int i = 0; i < NumTrials; ++i) {
       total += SingleTrial(cutoff);
     }  
-    return total / NUM_TRIALS;
+    return total / NumTrials;
   }
   
   public static void Main() {
-    for (int cutoff = 0; cutoff < 2 * LOWER_PRIOR_MAX; ++cutoff) {
+    for (int cutoff = 0; cutoff < 2 * LowerPriorMax; ++cutoff) {
       Console.WriteLine(string.Format("cutoff={0}, expected_value={1}",
           cutoff, MultiTrial(cutoff)));
     }
