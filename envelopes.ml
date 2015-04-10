@@ -35,11 +35,6 @@ let multi_trial cutoff =
   (get_multi_trial_total cutoff_f 0 0.) /. num_trials_f;;
 
 (* Prints the expected value for each possible cutoff. *)
-let rec cutoff_trials cutoff =
-  if cutoff <= 2 * prior_lower_max then begin
-    Printf.printf "cutoff=%d, expected_value=%f\n" cutoff (multi_trial cutoff);
-    cutoff_trials (cutoff + 1)
-  end
-  else ();;
-
-cutoff_trials 0
+for cutoff = 0 to 2 * prior_lower_max do
+  Printf.printf "cutoff=%d, expected_value=%f\n" cutoff (multi_trial cutoff)
+done;
