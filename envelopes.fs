@@ -39,6 +39,5 @@ let rec cutoff_trials cutoff =
     Printf.printf "cutoff=%d, expected_value=%f\n" cutoff (multi_trial cutoff)
     cutoff_trials (cutoff + 1)
   end
-  else ()
 
 cutoff_trials 0
