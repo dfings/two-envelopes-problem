@@ -8,10 +8,10 @@
 
 Random.self_init();;
 
-let num_trials = 10000
-let num_trials_f = float_of_int num_trials
-let prior_lower_max = 100
-let prior_lower_max_f = float_of_int prior_lower_max
+let num_trials = 10000;;
+let num_trials_f = float_of_int num_trials;;
+let prior_lower_max = 100;;
+let prior_lower_max_f = float_of_int prior_lower_max;;
 
 (* Returns the result of a single trial. We switch if the value is below the
    cutoff. *)
@@ -37,4 +37,4 @@ let multi_trial cutoff =
 (* Prints the expected value for each possible cutoff. *)
 for cutoff = 0 to 2 * prior_lower_max do
   Printf.printf "cutoff=%d, expected_value=%f\n" cutoff (multi_trial cutoff)
-done;
+done;;
