@@ -10,7 +10,7 @@ def multi_trial(cutoff):
   total_result = 0
   for _ in xrange(NUM_TRIALS):
     lower_value = randfloat() * 100
-    if randfloat() * 2 < 1:
+    if randfloat() < 0.5:
       if lower_value >= cutoff:
         total_result = total_result + lower_value
       else:

@@ -10,7 +10,7 @@ PRIOR_LOWER_MAX = 100
 def single_trial(cutoff)
   lower_value = rand() * PRIOR_LOWER_MAX
   higher_value = 2 * lower_value
-  if rand(2) == 0 then
+  if rand() < 0.5 then
   	return (if lower_value >= cutoff then lower_value else higher_value end)
   else
   	return (if higher_value >= cutoff then higher_value else lower_value end)

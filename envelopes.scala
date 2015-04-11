@@ -18,10 +18,10 @@ object Envelopes {
    * the function will switch envelopes, otherwise it will keep the envelope it has chosen. Returns
    * the value of the envelope it ultimately selects.
    */
-  def singleTrial(cutoff: Int) : Int = {
-    val lowerValue = random.nextInt(PRIOR_LOWER_MAX)
+  def singleTrial(cutoff: Int) : Float = {
+    val lowerValue = random.nextFloat() * PRIOR_LOWER_MAX
     val higherValue = 2 * lowerValue
-    if (random.nextInt(2) == 0) {
+    if (random.nextBoolean()) {
       if (lowerValue >= cutoff) lowerValue else higherValue
     } else { 
       if (higherValue >= cutoff) higherValue else lowerValue
@@ -30,11 +30,11 @@ object Envelopes {
 
   /** Runs many trials at a given cutoff to approximate the expected value. */
   def multiTrial(cutoff: Int) : Float = {
-    var totalResult = 0
+    var totalResult = 0f
     for (i <- 0 until NUM_TRIALS) {
       totalResult += singleTrial(cutoff)
     }
-    return totalResult.toFloat / NUM_TRIALS
+    return totalResult / NUM_TRIALS
   }
   
   def main(args: Array[String]) {

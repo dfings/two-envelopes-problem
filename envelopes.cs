@@ -38,8 +38,8 @@ public sealed class Envelopes {
   
   public static void Main() {
     for (int cutoff = 0; cutoff < 2 * LowerPriorMax; ++cutoff) {
-      Console.WriteLine(string.Format("cutoff={0}, expected_value={1}",
-          cutoff, MultiTrial(cutoff)));
+      Console.WriteLine("cutoff={0}, expected_value={1}", 
+          cutoff, MultiTrial(cutoff));
     }
   }
 }

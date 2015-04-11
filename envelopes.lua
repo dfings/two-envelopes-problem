@@ -10,7 +10,7 @@ PRIOR_LOWER_MAX = 100
 function single_trial(cutoff)  
   lower_value = math.random() * PRIOR_LOWER_MAX
   higher_value = 2 * lower_value
-  if math.random(2) == 1 then
+  if math.random() < 0.5 then
     return lower_value >= cutoff and lower_value or higher_value
   else
     return higher_value >= cutoff and higher_value or lower_value
