@@ -6,33 +6,33 @@
 
 let rng = System.Random()
 
-let num_trials = 10000
-let num_trials_f = float num_trials
-let prior_lower_max = 100
-let prior_lower_max_f = float prior_lower_max
+let numTrials = 10000
+let numTrialsF = float numTrials
+let priorLowerMax = 100
+let priorLowerMaxF = float priorLowerMax
 
 (* Returns the result of a single trial. We switch if the value is below the
    cutoff. *)
-let single_trial cutoff =
-  let lower_value = rng.NextDouble() * prior_lower_max_f
-  let higher_value = 2.0 * lower_value
+let singleTrial cutoff =
+  let lowerValue = rng.NextDouble() * priorLowerMaxF
+  let higherValue = 2.0 * lowerValue
   let choice = rng.Next(0, 2)
   if choice = 0 then
-    if lower_value >= cutoff then lower_value else higher_value
+    if lowerValue >= cutoff then lowerValue else higherValue
   else
-    if higher_value >= cutoff then higher_value else lower_value
+    if higherValue >= cutoff then higherValue else lowerValue
 
 (* Returns the total value of all of the trials for a given cutoff level. *)
-let rec get_multi_trial_total cutoff i total =
-  if i < num_trials then
-    get_multi_trial_total cutoff (i + 1) (total + single_trial cutoff)
+let rec getMultiTrialTotal cutoff i total =
+  if i < numTrials then
+    getMultiTrialTotal cutoff (i + 1) (total + singleTrial cutoff)
   else total
 
 (* Computes the average value among many trials. *)
-let multi_trial cutoff =
-  let cutoff_f = float cutoff
-  (get_multi_trial_total cutoff_f 0 0.) / num_trials_f
+let multiTrial cutoff =
+  let cutoffF = float cutoff
+  (getMultiTrialTotal cutoffF 0 0.) / numTrialsF
 
 (* Prints the expected value for each possible cutoff. *)
-for cutoff = 0 to 2 * prior_lower_max do
-  Printf.printf "cutoff=%d, expected_value=%f\n" cutoff (multi_trial cutoff)
+for cutoff = 0 to 2 * priorLowerMax do
+  Printf.printf "cutoff=%d, expected_value=%f\n" cutoff (multiTrial cutoff)
