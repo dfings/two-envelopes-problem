@@ -6,13 +6,15 @@ NUM_TRIALS = 10000
 		
 def multi_trial(cutoff):
   """Runs many trials at a given cutoff to approximate the expected value."""
-  randfloat = random.random
+  randfloat = random.random  # Avoid . call in the inner loop.
   total_result = 0
+  cutoff_scaled = cutoff / 100.0  # Avoid multiplication in the inner loop.
   for _ in xrange(NUM_TRIALS):
-    lower_value = randfloat() * 100
+    lower_value = randfloat()
     if randfloat() < 0.5:
-      if lower_value >= cutoff:
-        total_result = total_result + lower_value
+      if lower_value >= cutoff_scaled:
+        # Avoid computation of higher_value in this path.
+        total_result = total_result + lower_value  
       else:
         total_result = total_result + 2 * lower_value
     else:
@@ -21,7 +23,7 @@ def multi_trial(cutoff):
         total_result = total_result + higher_value
       else:
         total_result = total_result + lower_value        
-  return total_result / NUM_TRIALS
+  return 100 * total_result / NUM_TRIALS
 
 
 if __name__ == '__main__':
