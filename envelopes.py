@@ -22,10 +22,10 @@ def single_trial(cutoff):
 		
 def multi_trial(cutoff):
   """Runs many trials at a given cutoff to approximate the expected value."""
-  total_result = 0
+  total = 0
   for _ in xrange(NUM_TRIALS):
-    total_result += single_trial(cutoff)
-  return total_result / NUM_TRIALS
+    total += single_trial(cutoff)
+  return total / NUM_TRIALS
 
 
 if __name__ == '__main__':
