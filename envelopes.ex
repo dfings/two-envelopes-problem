@@ -15,7 +15,7 @@ defmodule Envelopes do
   def single_trial(cutoff) do
     lower_value = :random.uniform() * @prior_lower_max
     higher_value = 2 * lower_value
-    case :random.uniform 2 do
+    case :random.uniform(2) do
       1 -> if lower_value >= cutoff do lower_value else higher_value end
       2 -> if higher_value >= cutoff do higher_value else lower_value end
     end
