@@ -36,7 +36,7 @@ public final class Envelopes {
   }
   
   public static void main(String[] args) {
-    for (int cutoff = 0; cutoff < 2 * LOWER_PRIOR_MAX; ++cutoff) {
+    for (int cutoff = 0; cutoff <= 2 * LOWER_PRIOR_MAX; ++cutoff) {
       System.out.println(String.format("cutoff=%d, expected_value=%f",
           cutoff, multiTrial(cutoff)));
     }

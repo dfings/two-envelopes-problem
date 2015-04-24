@@ -38,7 +38,7 @@ object Envelopes {
   }
   
   def main(args: Array[String]) {
-    for (cutoff <- 0 until 2 * PRIOR_LOWER_MAX) {
+    for (cutoff <- 0 until 2 * PRIOR_LOWER_MAX + 1) {
       val expectedValue = multiTrial(cutoff)
       println(s"cutoff=$cutoff, expected_value=$expectedValue")
     }

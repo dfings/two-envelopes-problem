@@ -33,7 +33,7 @@ double MultiTrial(int cutoff) {
 
 int main(int argc, char* argv[]) {
   srand(time(NULL));
-  for (int cutoff = 0; cutoff < 2 * kLowerPriorMax; ++cutoff) {
+  for (int cutoff = 0; cutoff <= 2 * kLowerPriorMax; ++cutoff) {
     printf("cutoff=%d, expected_value=%f\n", cutoff, MultiTrial(cutoff));
   }
   return 0;

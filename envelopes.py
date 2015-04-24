@@ -30,5 +30,5 @@ def multi_trial(cutoff):
 
 if __name__ == '__main__':
   """Approximates the expected value for each integral cutoff value."""
-  for cutoff in xrange(2 * PRIOR_LOWER_MAX):
+  for cutoff in xrange(2 * PRIOR_LOWER_MAX + 1):
     print "cutoff=%s, expected_value=%s" % (cutoff, multi_trial(cutoff))

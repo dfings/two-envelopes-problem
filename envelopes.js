@@ -26,6 +26,6 @@ function multiTrial(cutoff) {
   return total / NUM_TRIALS;
 }
 
-for (var cutoff = 0; cutoff < 2 * PRIOR_LOWER_MAX; cutoff++) {
+for (var cutoff = 0; cutoff <= 2 * PRIOR_LOWER_MAX; cutoff++) {
   console.log('cutoff=' + cutoff + ', expected_value=' + multiTrial(cutoff));
 }
