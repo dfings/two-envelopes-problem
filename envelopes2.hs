@@ -45,7 +45,7 @@ main :: IO ()
 main = do
   loop 0
   where loop cutoff = do
-        if cutoff /= maxCutoff then do
+        if cutoff <= maxCutoff then do
           expectedValue <- multiTrial (fromIntegral cutoff)
           putStrLn $ "cutoff=" ++ show cutoff ++ ", expectedValue=" ++ show expectedValue
           loop (cutoff + 1)

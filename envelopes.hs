@@ -35,7 +35,7 @@ randomIntList bounds len = do
 -- Generates the Monte Carlo approximation of the expected value for each 
 -- possible cutoff value.
 cutoffTrials cutoff = do
-  if cutoff /= maxCutoff then do
+  if cutoff <= maxCutoff then do
     envelopes <- randomIntList (0, 1) numTrials
     lowerValues <- randomIntList (0, priorLowerMax) numTrials
     let expectedValue = multiTrial envelopes lowerValues cutoff
