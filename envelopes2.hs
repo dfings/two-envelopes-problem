@@ -28,7 +28,6 @@ singleTrial cutoff = do
   return $ getExpectedValue envelope lowerValue cutoff
 
 -- Runs multiple trials to do Monte Carlo approximation of the expected value.
--- Surprisingly, a tail recursive version of this is much slower.
 multiTrial :: Float -> IO Float
 multiTrial cutoff = do
   loop 0 0
