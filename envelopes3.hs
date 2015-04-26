@@ -14,8 +14,8 @@ maxCutoff = 2 * priorLowerMax
 -- Returns the result of a single trial. envelope=0 means we picked the lower
 -- of the two envelopes, envelope=1 means we picked the higher. We switch if
 -- the value is below the cutoff.
-getExpectedValue :: Int -> Float -> Float -> Float
-getExpectedValue envelope lowerValue cutoff =
+getTrialValues :: Int -> Float -> Float -> Float
+getTrialValues envelope lowerValue cutoff =
   if value >= cutoff then value else other
   where higherValue = 2 * lowerValue
         (value, other) = if envelope == 0 
@@ -26,18 +26,18 @@ singleTrial :: Float -> State StdGen Float
 singleTrial cutoff = do
   envelope <- state $ randomR (0, 1)
   lowerValue <- state $ randomR (0.0, priorLowerMaxF)
-  return $ getExpectedValue envelope lowerValue cutoff
+  return $ getTrialValues envelope lowerValue cutoff
 
 -- Runs multiple trials to do Monte Carlo approximation of the expected value.
 multiTrial :: Float -> State StdGen Float
 multiTrial cutoff = do
   loop 0 0
   where loop total count = do
-        if count /= numTrials 
-          then do
-            singleTrialValue <- singleTrial cutoff
-            loop (total + singleTrialValue) (count + 1)
-          else return $ total / fromIntegral count
+        if count /= numTrials then do
+          singleTrialValue <- singleTrial cutoff
+          loop (total + singleTrialValue) (count + 1)
+        else
+          return $ total / fromIntegral count
 
 -- Generates the Monte Carlo approximation of the expected value for each 
 -- possible cutoff value.
