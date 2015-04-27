@@ -1,15 +1,21 @@
-;; $ java -cp ~/GitHub/clojure-1.6.0/clojure-1.6.0.jar clojure.main envelopes.clj
+;; alias clj="java -cp ~/GitHub/clojure-1.6.0/clojure-1.6.0.jar:. clojure.main"
+;; $ clj -m envelopes envelopes.clj
 ;; or 
-;; $ java -cp ~/GitHub/clojure-1.6.0/clojure-1.6.0.jar clojure.main
+;; $ brew install lein
+;; $ lein repl
 ;; user=> (load-file "envelopes.clj")
+;; user=> (envelopes/-main [])
+
+(ns envelopes)
 
 (def NUM_TRIALS 10000)
 (def PRIOR_LOWER_MAX 100)
 
-;; Helper to generate the [picked, other] list for a given run.
-(defn get-trial-values [envelope lower_value]
-  (let [values [lower_value (* 2 lower_value)]]
-    (if (== envelope 0) values (reverse values))))
+(defn get-trial-values 
+  "Helper to generate the [picked, other] list for a given run."
+  [envelope lower_value]
+    (let [values [lower_value (* 2 lower_value)]]
+      (if (== envelope 0) values (reverse values))))
 
 ;; Returns the result of a single trial. We switch if the value is below the
 ;; cutoff.
@@ -28,12 +34,10 @@
 (defn multi-trial [cutoff] (/ (get-multi-trial-total cutoff) NUM_TRIALS))
 
 ;; Prints the expected value for each possible cutoff.
-(defn main []
+(defn -main [args]
   (loop [cutoff 0]
     (if (> cutoff (* 2 PRIOR_LOWER_MAX))
       ()
       (let [expected_value (multi-trial cutoff)]
         (printf "cutoff=%s, expected_value=%s\n" cutoff expected_value)
         (recur (+ cutoff 1))))))
-        
-(main)
