@@ -2,7 +2,7 @@
 
 import Darwin  // For arc4random, etc.
 
-let NUM_TRIALS = 1000000
+let NUM_TRIALS = 10000
 let PRIOR_LOWER_MAX = 100
 
 // Runs a single trial where an envelope is chosen.  If the chosen envelope has
@@ -32,5 +32,5 @@ func multi_trial(cutoff: Int) -> Double {
 
 for cutoff in 0...(2 * PRIOR_LOWER_MAX) {
   let expected_value = multi_trial(cutoff)
-  println("cutoff=\(cutoff), expected_value=\(expected_value)")	
+  print("cutoff=\(cutoff), expected_value=\(expected_value)")	
 }
