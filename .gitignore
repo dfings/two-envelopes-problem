@@ -1,10 +1,6 @@
-
 *.beam
-
 *.exe
-
 *.cmi
-
 *.cmo
-
 *.class
+.DS_Store
