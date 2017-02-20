@@ -1,5 +1,6 @@
-// $ javac -cp . Envelopes.java
-// $ java -cp . Envelopes
+// $ brew install haxe
+// $ haxe -main Envelopes -js envelopes.hx.js
+// $ node envelopes.hx.js
 
 /** Monte Carlo simulation of the two envelopes problem. */
 class Envelopes {
