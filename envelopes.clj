@@ -1,7 +1,8 @@
-;; alias clj="java -cp ~/GitHub/clojure-1.6.0/clojure-1.6.0.jar:. clojure.main"
+;; Download from https://clojure.org/community/downloads
+;; alias clj="java -cp ~/Code/clojure-1.8.0/clojure-1.8.0.jar:. clojure.main"
 ;; $ clj -m envelopes envelopes.clj
 ;; or 
-;; $ brew install lein
+;; $ brew install leiningen
 ;; $ lein repl
 ;; user=> (load-file "envelopes.clj")
 ;; user=> (envelopes/-main [])
@@ -34,7 +35,7 @@
 (defn multi-trial [cutoff] (/ (get-multi-trial-total cutoff) NUM_TRIALS))
 
 ;; Prints the expected value for each possible cutoff.
-(defn -main [args]
+(defn -main [& args]
   (loop [cutoff 0]
     (if (> cutoff (* 2 PRIOR_LOWER_MAX))
       ()

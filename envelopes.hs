@@ -1,4 +1,4 @@
--- $ brew install haskell-platform
+-- $ brew cask install haskell-platform
 -- $ runhaskell envelopes.hs
 -- or
 -- $ ghc -o envelopes_hs envelopes.hs; ./envelopes_hs
