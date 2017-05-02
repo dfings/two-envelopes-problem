@@ -4,4 +4,5 @@
 *.cmo
 *.class
 .DS_Store
+bazel-*
 Cargo.lock
