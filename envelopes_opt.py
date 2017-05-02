@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import random
 
 NUM_TRIALS = 10000
@@ -9,7 +10,7 @@ def multi_trial(cutoff):
   randfloat = random.random  # Avoid . call in the inner loop.
   total = 0
   cutoff_scaled = cutoff / 100.0  # Avoid multiplication in the inner loop.
-  for _ in xrange(NUM_TRIALS):
+  for _ in range(NUM_TRIALS):
     lower_value = randfloat()
     if randfloat() < 0.5:
       if lower_value >= cutoff_scaled:
@@ -28,5 +29,5 @@ def multi_trial(cutoff):
 
 if __name__ == '__main__':
   """Approximates the expected value for each integral cutoff value."""
-  for cutoff in xrange(201):
-    print "cutoff=%s, expected_value=%s" % (cutoff, multi_trial(cutoff))
+  for cutoff in range(201):
+    print("cutoff={}, expected_value={}".format(cutoff, multi_trial(cutoff)))

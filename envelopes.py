@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import random
 
 NUM_TRIALS = 10000
@@ -23,12 +24,12 @@ def single_trial(cutoff):
 def multi_trial(cutoff):
   """Runs many trials at a given cutoff to approximate the expected value."""
   total = 0
-  for _ in xrange(NUM_TRIALS):
+  for _ in range(NUM_TRIALS):
     total += single_trial(cutoff)
   return total / NUM_TRIALS
 
 
 if __name__ == '__main__':
   """Approximates the expected value for each integral cutoff value."""
-  for cutoff in xrange(2 * PRIOR_LOWER_MAX + 1):
-    print "cutoff=%s, expected_value=%s" % (cutoff, multi_trial(cutoff))
+  for cutoff in range(2 * PRIOR_LOWER_MAX + 1):
+    print("cutoff={}, expected_value={}".format(cutoff, multi_trial(cutoff)))
