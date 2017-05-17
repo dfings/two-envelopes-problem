@@ -16,12 +16,10 @@ var random = Random()
 // the envelope it has chosen. Returns the value of the envelope it ultimately 
 // selects.
 fun singleTrial(cutoff: Int): Double {
+  val pick = {value: Double, other: Double -> if (value >= cutoff) value else other}
   val lowerValue = random.nextDouble() * PRIOR_LOWER_MAX
   val higherValue = 2 * lowerValue
-  return when (random.nextBoolean()) {
-    true -> if (lowerValue >= cutoff) lowerValue else higherValue  
-    false -> if (higherValue >= cutoff) higherValue else lowerValue
-  }
+  return if (random.nextBoolean()) pick(lowerValue, higherValue) else pick(higherValue, lowerValue)
 }
 
 // Runs many trials at a given cutoff to approximate the expected value.
