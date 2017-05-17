@@ -25,12 +25,12 @@ func multi_trial(cutoff: Int) -> Double {
   let cutoff64 = Double(cutoff)
   var total = 0.0
   for _ in 1...NUM_TRIALS {
-    total += single_trial(cutoff64)
+    total += single_trial(cutoff: cutoff64)
   }
   return total / Double(NUM_TRIALS)
 }
 
 for cutoff in 0...(2 * PRIOR_LOWER_MAX) {
-  let expected_value = multi_trial(cutoff)
+  let expected_value = multi_trial(cutoff: cutoff)
   print("cutoff=\(cutoff), expected_value=\(expected_value)")	
 }
