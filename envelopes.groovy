@@ -20,9 +20,8 @@ def singleTrial(pick) {
 def multiTrial(cutoff) {
   pick = {value, other -> value >= cutoff ? value : other}
   total = 0.0
-  for (i in 0 .. NUM_TRIALS) {
+  for (i in 0 .. NUM_TRIALS)
     total += singleTrial(pick)
-  }
   return total / NUM_TRIALS
 }
 
