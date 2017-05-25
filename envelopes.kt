@@ -1,5 +1,5 @@
 // $ brew install kotlin
-// $ kotlinc envelopes.kts -d envelopes.kt.jar
+// $ kotlinc envelopes.kt -d envelopes.kt.jar
 // $ kotlin -classpath envelopes.kt.jar EnvelopesKt
 // or (faster runtime)
 // $ kotlinc envelopes.kt -include-runtime -d envelopes.kt.jar
