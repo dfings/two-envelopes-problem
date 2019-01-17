@@ -22,7 +22,7 @@ singleTrial(var cutoff) {
 
 // Runs many trials at a given cutoff to approximate the expected value.
 multiTrial(var cutoff) {
-  var total = 0;
+  var total = 0.0;
   for (var i = 0; i < NUM_TRIALS; i++)
     total += singleTrial(cutoff);
   return total / NUM_TRIALS;
