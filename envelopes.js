@@ -7,21 +7,20 @@ var PRIOR_LOWER_MAX = 100;
 // a value < cutoff, the function will switch envelopes, otherwise it will keep
 // the envelope it has chosen. Returns the value of the envelope it ultimately 
 // selects.
-function singleTrial(cutoff) {
+function singleTrial(pick) {
   var lower_value = Math.random() * PRIOR_LOWER_MAX;
   var higher_value = 2 * lower_value;
-  if (Math.random() < 0.5) {
-    return lower_value >= cutoff ? lower_value : higher_value;
-  } else {
-    return higher_value >= cutoff ? higher_value : lower_value;
-  }
+  return Math.random() < 0.5 ? pick(lower_value, higher_value) : pick(higher_value, lower_value)
 }
 
 // Runs many trials at a given cutoff to approximate the expected value.
 function multiTrial(cutoff) {
+  function pick(value, other) {
+    return value >= cutoff ? value : other;
+  }
   var total = 0;
   for (var i = 0; i < NUM_TRIALS; i++)
-    total += singleTrial(cutoff);
+    total += singleTrial(pick);
   return total / NUM_TRIALS;
 }
 
