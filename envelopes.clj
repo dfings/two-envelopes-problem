@@ -1,11 +1,5 @@
-;; Download from https://clojure.org/community/downloads
-;; alias clj="java -cp ~/Code/clojure-1.8.0/clojure-1.8.0.jar:. clojure.main"
-;; $ clj -m envelopes envelopes.clj
-;; or 
-;; $ brew install leiningen
-;; $ lein repl
-;; user=> (load-file "envelopes.clj")
-;; user=> (envelopes/-main [])
+;; $ brew install clojure
+;; $ clj -Scp `clj -Spath`:. -m envelopes envelopes.clj
 
 (ns envelopes)
 
