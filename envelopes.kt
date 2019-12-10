@@ -5,7 +5,7 @@
 // $ kotlinc envelopes.kt -include-runtime -d envelopes.kt.jar
 // $ java -jar envelopes.kt.jar
 
-import java.util.Random;
+import java.util.Random
 
 val NUM_TRIALS = 10000
 val PRIOR_LOWER_MAX = 100
@@ -33,6 +33,8 @@ fun multiTrial(cutoff: Int): Double {
 }
 
 fun main(args: Array<String>) {
-  for (cutoff in 0..(2 * PRIOR_LOWER_MAX))
-    println("cutoff=$cutoff, expected_value=%f".format(multiTrial(cutoff)))
+  for (cutoff in 0..(2 * PRIOR_LOWER_MAX)) {
+    val expected_value = multiTrial(cutoff)
+    println("cutoff=$cutoff, expected_value=$expected_value")
+  }
 }
