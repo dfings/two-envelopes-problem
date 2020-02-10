@@ -7,13 +7,13 @@ import 'dart:math';
 
 const NUM_TRIALS = 10000;
 const PRIOR_LOWER_MAX = 100;
-final random = new Random();
+final random = Random();
 
 // Runs a single trial where an envelope is chosen.  If the chosen envelope has
 // a value < cutoff, the function will switch envelopes, otherwise it will keep
 // the envelope it has chosen. Returns the value of the envelope it ultimately 
 // selects.
-singleTrial(var cutoff) {
+singleTrial(cutoff) {
   var pick = (value, other) => value >= cutoff ? value : other;
   var lower_value = random.nextDouble() * PRIOR_LOWER_MAX;
   var higher_value = 2 * lower_value;
@@ -21,7 +21,7 @@ singleTrial(var cutoff) {
 }
 
 // Runs many trials at a given cutoff to approximate the expected value.
-multiTrial(var cutoff) {
+multiTrial(cutoff) {
   var total = 0.0;
   for (var i = 0; i < NUM_TRIALS; i++)
     total += singleTrial(cutoff);
