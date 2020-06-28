@@ -1,12 +1,9 @@
-#!/usr/bin/env xcrun swift
-
-import Darwin  // For arc4random, etc.
+#!/usr/bin/env swift
+// or
+// $ swiftc -o envelopes envelopes.swift; ./envelopes
 
 let NUM_TRIALS = 10000
 let PRIOR_LOWER_MAX = 100
-
-func randomDouble() -> Double { return Double(arc4random()) /  Double(UInt32.max) }
-func randomBool() -> Bool { return arc4random_uniform(2) == 0 }
 
 // Runs a single trial where an envelope is chosen.  If the chosen envelope has
 // a value < cutoff, the function will switch envelopes, otherwise it will keep
@@ -14,9 +11,9 @@ func randomBool() -> Bool { return arc4random_uniform(2) == 0 }
 // selects.
 func single_trial(_ cutoff: Double) -> Double {
   func pick(_ value: Double, _ other: Double) -> Double { return value >= cutoff ? value : other }
-  let lower_value = randomDouble() * Double(PRIOR_LOWER_MAX)
+  let lower_value = Double.random(in: 0..<1) * Double(PRIOR_LOWER_MAX)
   let higher_value = 2 * lower_value
-  return randomBool() ? pick(lower_value, higher_value) : pick(higher_value, lower_value)
+  return Bool.random() ? pick(lower_value, higher_value) : pick(higher_value, lower_value)
 }
 
 // Runs many trials at a given cutoff to approximate the expected value.
