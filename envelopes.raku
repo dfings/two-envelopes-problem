@@ -4,8 +4,8 @@
 
 use v6;
 
-my $PRIOR_LOWER_MAX = 100;
-my $NUM_TRIALS = 10000;
+constant $PRIOR_LOWER_MAX = 100;
+constant $NUM_TRIALS = 10000;
 
 # Runs a single trial where an envelope is chosen.  If the chosen envelope has
 # a value < cutoff, the function will switch envelopes, otherwise it will keep
@@ -24,12 +24,12 @@ sub single_trial($cutoff) {
 # Runs many trials at a given cutoff to approximate the expected value.
 sub multi_trial($cutoff) {
   my $total = 0;
-  loop (my $i = 0; $i < $NUM_TRIALS; $i++) {
+  for 0..$NUM_TRIALS {
     $total += single_trial($cutoff)
   }
   return $total / $NUM_TRIALS;
 }
 
-loop (my $cutoff = 0; $cutoff < 2 * $PRIOR_LOWER_MAX + 1; $cutoff++) {
+for 0..(2 * $PRIOR_LOWER_MAX + 1) -> $cutoff {
   sprintf("cutoff=%d, expected_value=%f", $cutoff, multi_trial($cutoff)).put;
 }
