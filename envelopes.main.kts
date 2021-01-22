@@ -1,9 +1,4 @@
-// $ brew install kotlin
-// $ kotlinc envelopes.kt -d envelopes.kt.jar
-// $ kotlin -classpath envelopes.kt.jar EnvelopesKt
-// or (faster runtime)
-// $ kotlinc envelopes.kt -include-runtime -d envelopes.kt.jar
-// $ java -jar envelopes.kt.jar
+#!/usr/bin/env kotlin
 
 import java.util.Random
 
@@ -32,9 +27,7 @@ fun multiTrial(cutoff: Int): Double {
   return total / NUM_TRIALS
 }
 
-fun main() {
-  for (cutoff in 0..(2 * PRIOR_LOWER_MAX)) {
-    val expected_value = multiTrial(cutoff)
-    println("cutoff=$cutoff, expected_value=$expected_value")
-  }
+for (cutoff in 0..(2 * PRIOR_LOWER_MAX)) {
+  val expected_value = multiTrial(cutoff)
+  println("cutoff=$cutoff, expected_value=$expected_value")
 }
