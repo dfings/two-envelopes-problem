@@ -1,13 +1,17 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env deno run
 
 // $ brew install typescript
+// $ echo '{"compilerOptions": {"noImplicitAny": true}}' > tsconfig.json
+// Deno:
+// $ brew install deno
+// Node:
 // $ npm install -g ts-node
 // $ npm install -g typescript
-// $ echo '{"compilerOptions": {"noImplicitAny": true}}' > tsconfig.json
 
 // $ ./envelopes.ts
 // or
 // $ tsc envelopes.ts --outFile envelopes.ts.js
+// $ deno run ./envelopes.ts.js
 // $ node ./envelopes.ts.js
 
 const NUM_TRIALS = 10000;
