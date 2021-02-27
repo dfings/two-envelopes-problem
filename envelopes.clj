@@ -1,5 +1,6 @@
 ;; $ brew install clojure
-;; $ clj -Scp `clj -Spath`:. -m envelopes envelopes.clj
+;; $ alias runclojure='clj -Scp `clj -Spath`:. -M'
+;; $ runclojure -m envelopes envelopes.clj
 
 (ns envelopes)
 
