@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-from __future__ import print_function
 import random
 
 NUM_TRIALS = 10000
@@ -28,8 +27,7 @@ def multi_trial(cutoff):
     return 100 * total / NUM_TRIALS
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     """Approximates the expected value for each integral cutoff value."""
     for cutoff in range(201):
-        print("cutoff={}, expected_value={}".format(
-            cutoff, multi_trial(cutoff)))
+        print("cutoff={}, expected_value={}".format(cutoff, multi_trial(cutoff)))

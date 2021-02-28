@@ -9,7 +9,7 @@ PRIOR_LOWER_MAX = 100
 def single_trial(cutoff):
     """Runs a single trial where an envelope is chosen.
 
-    If the chosen envelope has a value < cutoff, the function will switch 
+    If the chosen envelope has a value < cutoff, the function will switch
     envelopes, otherwise it will keep the envelope it has chosen. Returns
     the value of the envelope it ultimately selects.
     """
