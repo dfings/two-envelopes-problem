@@ -13,7 +13,7 @@ final random = Random();
 // a value < cutoff, the function will switch envelopes, otherwise it will keep
 // the envelope it has chosen. Returns the value of the envelope it ultimately 
 // selects.
-singleTrial(cutoff) {
+double singleTrial(int cutoff) {
   var pick = (value, other) => value >= cutoff ? value : other;
   var lower_value = random.nextDouble() * PRIOR_LOWER_MAX;
   var higher_value = 2 * lower_value;
@@ -21,14 +21,14 @@ singleTrial(cutoff) {
 }
 
 // Runs many trials at a given cutoff to approximate the expected value.
-multiTrial(cutoff) {
+double multiTrial(int cutoff) {
   var total = 0.0;
   for (var i = 0; i < NUM_TRIALS; i++)
     total += singleTrial(cutoff);
   return total / NUM_TRIALS;
 }
 
-main() {
+void main() {
   for (int cutoff = 0; cutoff <= 2 * PRIOR_LOWER_MAX; cutoff++) {
     var expectedValue = multiTrial(cutoff);
     print('cutoff=$cutoff, expected_value=$expectedValue');
