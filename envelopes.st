@@ -4,7 +4,7 @@
 Object subclass: Envelopes [
     | numTrials priorLowerMax rand |
     Envelopes class >> new [        
-        ^(super new) init
+        ^super new init
     ]
     init [
         numTrials := 10000.
@@ -22,14 +22,16 @@ Object subclass: Envelopes [
         | lowerValue higherValue |
         lowerValue := rand next * priorLowerMax.
         higherValue := 2 * lowerValue.
-        ((rand next * 2) floor) == 0
-            ifTrue: [lowerValue >= cutoff 
-                ifTrue: [^lowerValue] 
-                ifFalse: [^higherValue]
+        (rand next * 2) floor == 0
+            ifTrue: [
+                lowerValue >= cutoff 
+                    ifTrue: [^lowerValue] 
+                    ifFalse: [^higherValue]
             ]
-            ifFalse: [higherValue >= cutoff 
-                ifTrue: [^higherValue] 
-                ifFalse: [^lowerValue]
+            ifFalse: [
+                higherValue >= cutoff 
+                    ifTrue: [^higherValue] 
+                    ifFalse: [^lowerValue]
             ]      
     ]
     "Runs many trials at a given cutoff to approximate the expected value."
@@ -39,7 +41,7 @@ Object subclass: Envelopes [
         1 to: numTrials do: [:i |
             total := total + (self singleTrial: cutoff) 
         ].
-        ^(total / numTrials)
+        ^total / numTrials
     ]
 ].
 
