@@ -1,10 +1,9 @@
 #!/usr/bin/env kotlin
 
-import java.util.Random
+import kotlin.random.Random
 
 val NUM_TRIALS = 10000
 val PRIOR_LOWER_MAX = 100
-var random = Random()
 
 /**
  * Runs a single trial where an envelope is chosen.  If the chosen envelope has
@@ -12,19 +11,17 @@ var random = Random()
  * the envelope it has chosen. Returns the value of the envelope it ultimately 
  * selects.
  */
-fun singleTrial(cutoff: Int): Double {
-  val pick = {value: Double, other: Double -> if (value >= cutoff) value else other}
-  val lowerValue = random.nextDouble() * PRIOR_LOWER_MAX
+inline fun singleTrial(pick: (Double, Double) -> Double): Double {
+  val lowerValue = Random.nextDouble() * PRIOR_LOWER_MAX
   val higherValue = 2 * lowerValue
-  return if (random.nextBoolean()) pick(lowerValue, higherValue) else pick(higherValue, lowerValue)
+  return if (Random.nextBoolean()) pick(lowerValue, higherValue) else pick(higherValue, lowerValue)
 }
 
 /** Runs many trials at a given cutoff to approximate the expected value. */
 fun multiTrial(cutoff: Int): Double {
-  var total = 0.0
-  for (i in 0..NUM_TRIALS)
-    total += singleTrial(cutoff)
-  return total / NUM_TRIALS
+  return (0..NUM_TRIALS).asSequence().map {
+      singleTrial { value, other -> if (value >= cutoff) value else other }
+  }.average()
 }
 
 for (cutoff in 0..(2 * PRIOR_LOWER_MAX)) {
