@@ -18,11 +18,11 @@ fn single_trial<R: Rng>(cutoff: f64, rng: &mut R) -> f64 {
     let higher_value = 2f64 * lower_value;
     match rng.gen::<bool>() {
         true => match lower_value {
-            x if x >= cutoff => lower_value,
+            v if v >= cutoff => v,
             _ => higher_value,
         },
         false => match higher_value {
-            x if x >= cutoff => higher_value,
+            v if v >= cutoff => v,
             _ => lower_value,
         },
     }
