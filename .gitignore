@@ -6,5 +6,10 @@
 *.jar
 .DS_Store
 bazel-*
-Cargo.lock
 modules
+
+# Rust
+debug/
+target/
+Cargo.lock
+**/*.rs.bk

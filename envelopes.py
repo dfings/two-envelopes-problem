@@ -17,8 +17,7 @@ def single_trial(cutoff):
     higher_value = 2 * lower_value
     if random.random() < 0.5:
         return lower_value if lower_value >= cutoff else higher_value
-    else:
-        return higher_value if higher_value >= cutoff else lower_value
+    return higher_value if higher_value >= cutoff else lower_value
 
 
 def multi_trial(cutoff):
