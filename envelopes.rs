@@ -16,18 +16,15 @@ const PRIOR_LOWER_MAX: i32 = 100;
 fn single_trial<R: Rng>(cutoff: f64, rng: &mut R) -> f64 {
     let lower_value = rng.gen::<f64>() * PRIOR_LOWER_MAX as f64;
     let higher_value = 2f64 * lower_value;
-    if rng.gen::<bool>() {
-        if lower_value >= cutoff {
-            lower_value
-        } else {
-            higher_value
-        }
-    } else {
-        if higher_value >= cutoff {
-            higher_value
-        } else {
-            lower_value
-        }
+    match rng.gen::<bool>() {
+        true => match lower_value {
+            x if x >= cutoff => lower_value,
+            _ => higher_value,
+        },
+        false => match higher_value {
+            x if x >= cutoff => higher_value,
+            _ => lower_value,
+        },
     }
 }
 
