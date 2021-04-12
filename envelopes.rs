@@ -1,6 +1,6 @@
 // $ brew install rust
-// $ cargo build
-// $ ./target/debug/envelopes.rs
+// $ cargo build --release
+// $ ./target/release/envelopes_rs
 
 extern crate rand;
 
