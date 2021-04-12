@@ -1,19 +1,11 @@
 [package]
 name = "envelopes"
 version = "0.1.0"
-
-[profile.dev]
-opt-level = 3
-debug = false
-rpath = false
-lto = false
-debug-assertions = false
-codegen-units = 1
-panic = 'unwind'
+edition = "2018"
 
 [[bin]]
 name = "envelopes_rs"
 path = "envelopes.rs"
 
 [dependencies]
-rand = "*"
+rand = "0.8.3"
