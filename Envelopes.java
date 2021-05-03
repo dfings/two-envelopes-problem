@@ -22,8 +22,8 @@ public final class Envelopes {
    * selects.
    */
   private static double singleTrial(Picker picker) {
-    double lowerValue = random.nextDouble() * LOWER_PRIOR_MAX;
-    double higherValue = 2 * lowerValue;
+    var lowerValue = random.nextDouble() * LOWER_PRIOR_MAX;
+    var higherValue = 2 * lowerValue;
     return random.nextInt(2) == 0 
         ? picker.pick(lowerValue, higherValue) 
         : picker.pick(higherValue, lowerValue);
@@ -32,7 +32,7 @@ public final class Envelopes {
   /** Runs many trials at a given cutoff to approximate the expected value. */
   private static double multiTrial(int cutoff) {
     Picker picker = (value, other) -> value >= cutoff ? value : other;
-    double total = 0;
+    var total = 0.0;
     for (int i = 0; i < NUM_TRIALS; ++i) {
       total += singleTrial(picker);
     }  
