@@ -25,6 +25,5 @@ fun multiTrial(cutoff: Int): Double {
 }
 
 for (cutoff in 0..(2 * PRIOR_LOWER_MAX)) {
-  val expected_value = multiTrial(cutoff)
-  println("cutoff=$cutoff, expected_value=$expected_value")
+  println("cutoff=$cutoff, expected_value=${multiTrial(cutoff)}")
 }

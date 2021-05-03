@@ -4,6 +4,7 @@
 *.cmo
 *.class
 *.jar
+*.tasty
 .DS_Store
 bazel-*
 modules
