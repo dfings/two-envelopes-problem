@@ -14,16 +14,15 @@ val random = scala.util.Random()
  * the function will switch envelopes, otherwise it will keep the envelope it has chosen. Returns
  * the value of the envelope it ultimately selects.
  */
-def singleTrial(cutoff: Int) =
+def singleTrial(pick: (Double, Double) => Double) =
   val lowerValue = random.nextDouble() * PRIOR_LOWER_MAX
   val higherValue = 2 * lowerValue
-  if random.nextBoolean() 
-    then (if lowerValue >= cutoff then lowerValue else higherValue)
-    else (if higherValue >= cutoff then higherValue else lowerValue)
+  if random.nextBoolean() then pick(lowerValue, higherValue) else pick(higherValue, lowerValue)
 
 /** Runs many trials at a given cutoff to approximate the expected value. */
 def multiTrial(cutoff: Int) =
-  (1 to NUM_TRIALS).map { _ => singleTrial(cutoff) }.sum / NUM_TRIALS
+  val picker = (value: Double, other: Double) => if value >= cutoff then value else other
+  (1 to NUM_TRIALS).view.map { _ => singleTrial(picker) }.sum / NUM_TRIALS
 
 @main def main() =
   for cutoff <- 0 to 2 * PRIOR_LOWER_MAX do
