@@ -22,7 +22,9 @@ def singleTrial(pick: (Double, Double) => Double) =
 /** Runs many trials at a given cutoff to approximate the expected value. */
 def multiTrial(cutoff: Int) =
   val picker = (value: Double, other: Double) => if value >= cutoff then value else other
-  (1 to NUM_TRIALS).view.map { _ => singleTrial(picker) }.sum / NUM_TRIALS
+  def getTotal(i: Int, total: Double): Double =
+    if i == NUM_TRIALS then total else getTotal(i + 1, total + singleTrial(picker))
+  getTotal(0, 0.0) / NUM_TRIALS
 
 @main def main() =
   for cutoff <- 0 to 2 * PRIOR_LOWER_MAX do
