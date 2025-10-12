@@ -30,4 +30,4 @@ def multi_trial(cutoff):
 
 # Approximates the expected value for each integral cutoff value.
 for cutoff in range(2 * PRIOR_LOWER_MAX + 1):
-    print("cutoff={}, expected_value={}".format(cutoff, multi_trial(cutoff)))
+    print(f"cutoff={cutoff}, expected_value={multi_trial(cutoff)}")
