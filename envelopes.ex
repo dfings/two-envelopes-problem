@@ -19,7 +19,7 @@ defmodule Envelopes do
   """
   @spec single_trial(number) :: number
   def single_trial(cutoff) do
-    lower_value = :random.uniform() * @prior_lower_max
+    lower_value = :rand.uniform() * @prior_lower_max
     higher_value = 2 * lower_value
 
     # You are presented with one of the envelopes at random.
