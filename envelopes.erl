@@ -20,7 +20,7 @@ get_trial_values(Envelope, LowerValue) ->
 % Returns the result of a single trial. We switch if the value is below the
 % cutoff.
 single_trial(Cutoff) ->
-  Values = get_trial_values(random:uniform(2), random:uniform() * prior_lower_max()),
+  Values = get_trial_values(rand:uniform(2), rand:uniform() * prior_lower_max()),
   Choice = lists:nth(1, Values),
   if Choice >= Cutoff -> Choice; true -> lists:nth(2, Values) end.
   
@@ -41,5 +41,4 @@ cutoff_trials(Cutoff, Remaining) ->
   cutoff_trials(Cutoff + 1, Remaining - 1).
       
 main() -> 
-  random:seed(now()),
   cutoff_trials(0, 2 * prior_lower_max() + 1).
