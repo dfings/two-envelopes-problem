@@ -36,13 +36,19 @@ defmodule Envelopes do
   @doc """
   Recursively calculates the total value from multiple trials for a given cutoff.
   This function is tail-recursive. It should be called with initial
-  accumulators, e.g., `multi_trial(cutoff, 0, 0)`.
+  accumulators, e.g., `get_multi_trial_total(cutoff, 0, 0)`.
   """
-  @spec multi_trial(number, non_neg_integer, number) :: number
-  def multi_trial(_, @num_trials, total), do: total
-  def multi_trial(cutoff, i, total) do
-    multi_trial(cutoff, i + 1, total + single_trial(cutoff))
+  @spec get_multi_trial_total(number, non_neg_integer, number) :: number
+  def get_multi_trial_total(_, @num_trials, total), do: total
+  def get_multi_trial_total(cutoff, i, total) do
+    get_multi_trial_total(cutoff, i + 1, total + single_trial(cutoff))
   end
+
+  @doc """
+  Returns the total value of all of the trials for a given cutoff level. 
+  """
+  @spec multi_trial(number) :: number
+  def multi_trial(cutoff) do get_multi_trial_total(cutoff, 0, 0) / @num_trials end
 
   @doc """
   Runs the simulation for a range of cutoff values and prints the expected
@@ -51,8 +57,7 @@ defmodule Envelopes do
   def main do
     0..@cutoff_max
     |> Enum.each(fn cutoff ->
-      total_value = multi_trial(cutoff, 0, 0)
-      expected_value = total_value / @num_trials
+      expected_value = multi_trial(cutoff)
       IO.puts("cutoff=#{cutoff}, expected_value=#{expected_value}")
     end)
   end
