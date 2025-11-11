@@ -18,8 +18,11 @@ const val PRIOR_LOWER_MAX = 100
 inline fun singleTrial(pick: (Double, Double) -> Double): Double {
     val lowerValue = Random.nextDouble() * PRIOR_LOWER_MAX
     val higherValue = 2 * lowerValue
-    return if (Random.nextBoolean()) pick(lowerValue, higherValue)
-    else pick(higherValue, lowerValue)
+    return if (Random.nextBoolean()) {
+        pick(lowerValue, higherValue)
+    } else {
+        pick(higherValue, lowerValue)
+    }
 }
 
 /** Runs many trials at a given cutoff to approximate the expected value. */
