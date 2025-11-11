@@ -10,22 +10,19 @@ val PRIOR_LOWER_MAX = 100
  * function will switch envelopes, otherwise it will keep the envelope it has chosen. Returns the
  * value of the envelope it ultimately selects.
  */
-inline fun singleTrial(pick: (Double, Double) -> Double): Double {
+fun singleTrial(cutoff: Int): Double {
     val lowerValue = Random.nextDouble() * PRIOR_LOWER_MAX
     val higherValue = 2 * lowerValue
     return if (Random.nextBoolean()) {
-        pick(lowerValue, higherValue)
+        if (lowerValue >= cutoff) lowerValue else higherValue
     } else {
-        pick(higherValue, lowerValue)
+        if (higherValue >= cutoff) higherValue else lowerValue
     }
 }
 
 /** Runs many trials at a given cutoff to approximate the expected value. */
 fun multiTrial(cutoff: Int): Double {
-    return (0..NUM_TRIALS)
-        .asSequence()
-        .map { singleTrial { value, other -> if (value >= cutoff) value else other } }
-        .average()
+    return (0..NUM_TRIALS).asSequence().map { singleTrial(cutoff) }.average()
 }
 
 for (cutoff in 0..(2 * PRIOR_LOWER_MAX)) {
