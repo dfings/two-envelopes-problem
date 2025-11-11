@@ -7,9 +7,8 @@
 
 import kotlin.random.Random
 
-val NUM_TRIALS = 10000
-
-val PRIOR_LOWER_MAX = 100
+const val NUM_TRIALS = 10000
+const val PRIOR_LOWER_MAX = 100
 
 /**
  * Runs a single trial where an envelope is chosen. If the chosen envelope has a value < cutoff, the
@@ -26,9 +25,9 @@ inline fun singleTrial(pick: (Double, Double) -> Double): Double {
 /** Runs many trials at a given cutoff to approximate the expected value. */
 fun multiTrial(cutoff: Int): Double {
     return (0..NUM_TRIALS)
-            .asSequence()
-            .map { singleTrial { value, other -> if (value >= cutoff) value else other } }
-            .average()
+        .asSequence()
+        .map { singleTrial { value, other -> if (value >= cutoff) value else other } }
+        .average()
 }
 
 fun main() {
