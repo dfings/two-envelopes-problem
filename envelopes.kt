@@ -18,10 +18,9 @@ const val PRIOR_LOWER_MAX = 100
 fun singleTrial(cutoff: Int): Double {
     val lowerValue = Random.nextDouble() * PRIOR_LOWER_MAX
     val higherValue = 2 * lowerValue
-    return if (Random.nextBoolean()) {
-        if (lowerValue >= cutoff) lowerValue else higherValue
-    } else {
-        if (higherValue >= cutoff) higherValue else lowerValue
+    return when (Random.nextBoolean()) {
+        true -> if (lowerValue >= cutoff) lowerValue else higherValue
+        else -> if (higherValue >= cutoff) higherValue else lowerValue
     }
 }
 
