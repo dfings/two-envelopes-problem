@@ -21,9 +21,7 @@ fun singleTrial(cutoff: Int): Double {
 }
 
 /** Runs many trials at a given cutoff to approximate the expected value. */
-fun multiTrial(cutoff: Int): Double {
-    return (0..NUM_TRIALS).asSequence().map { singleTrial(cutoff) }.average()
-}
+fun multiTrial(cutoff: Int) = (0..NUM_TRIALS).asSequence().map { singleTrial(cutoff) }.average()
 
 for (cutoff in 0..(2 * PRIOR_LOWER_MAX)) {
     println("cutoff=$cutoff, expected_value=${multiTrial(cutoff)}")
