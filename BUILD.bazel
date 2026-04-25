@@ -1,5 +1,6 @@
-load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library", "kt_jvm_binary")
+load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
 load("@rules_java//java:defs.bzl", "java_binary")
+load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_library")
 
 cc_binary(
   name = "envelopes_cc",

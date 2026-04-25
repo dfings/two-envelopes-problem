@@ -4,6 +4,7 @@
 *.cmo
 *.class
 *.jar
+*.lock
 *.tasty
 .DS_Store
 bazel-*
@@ -14,3 +15,6 @@ debug/
 target/
 Cargo.lock
 **/*.rs.bk
+
+# Gleam
+build/
