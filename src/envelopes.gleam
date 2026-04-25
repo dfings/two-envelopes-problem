@@ -38,10 +38,10 @@ fn multi_trial(cutoff: Int) -> Float {
   total /. int.to_float(num_trials)
 }
 
-fn cutoff_trials(cutoff: Int, max_cutoff: Int) -> Nil {
-  case cutoff < max_cutoff {
-    False -> Nil
-    True -> {
+fn cutoff_trials(cutoff: Int, remaining: Int) -> Nil {
+  case remaining {
+    0 -> Nil
+    _ -> {
       let expected_value = multi_trial(cutoff)
       io.println(
         "cutoff="
@@ -49,7 +49,7 @@ fn cutoff_trials(cutoff: Int, max_cutoff: Int) -> Nil {
         <> ", expected_value="
         <> float.to_string(expected_value),
       )
-      cutoff_trials(cutoff + 1, max_cutoff)
+      cutoff_trials(cutoff + 1, remaining - 1)
     }
   }
 }
