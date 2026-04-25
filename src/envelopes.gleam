@@ -12,7 +12,6 @@ const prior_lower_max_f = 100.0
 const num_trials = 10_000
 
 fn single_trial(cutoff: Int) -> Float {
-  // Fix me
   let lower_value = float.random() *. prior_lower_max_f
   let higher_value = lower_value *. 2.0
   let #(chosen_value, other_value) = case float.random() <. 0.5 {
