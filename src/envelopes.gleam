@@ -25,15 +25,16 @@ fn single_trial(cutoff: Int) -> Float {
   }
 }
 
-fn get_multi_trial_total(cutoff: Int, remaining: Int) -> Float {
+fn get_multi_trial_total(cutoff: Int, remaining: Int, acc: Float) -> Float {
   case remaining {
-    0 -> 0.0
-    _ -> single_trial(cutoff) +. get_multi_trial_total(cutoff, remaining - 1)
+    0 -> acc
+    _ ->
+      get_multi_trial_total(cutoff, remaining - 1, acc +. single_trial(cutoff))
   }
 }
 
 fn multi_trial(cutoff: Int) -> Float {
-  let total = get_multi_trial_total(cutoff, num_trials)
+  let total = get_multi_trial_total(cutoff, num_trials, 0.0)
   total /. int.to_float(num_trials)
 }
 
