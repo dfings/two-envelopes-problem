@@ -41,16 +41,12 @@ fn multi_trial(random: std.Random, cutoff: f64) f64 {
 }
 
 /// Approximates the expected value for each integral cutoff value.
-pub fn main() !void {
-    // 1. Seed the Pseudo-Random Number Generator (PRNG).
-    var prng = std.Random.Sfc64.init(blk: {
-        var seed: u64 = undefined;
-        try std.posix.getrandom(std.mem.asBytes(&seed));
-        break :blk seed;
-    });
+pub fn main(init: std.process.Init) !void {
+    var seed: u64 = undefined;
+    std.Io.random(init.io, std.mem.asBytes(&seed));
+    var prng = std.Random.DefaultPrng.init(seed);
     const random = prng.random();
 
-    // 3. Loop through cutoff values and print the results.
     const MAX_CUTOFF = @as(u32, @floor(2.0 * PRIOR_LOWER_MAX));
     var cutoff: u32 = 0;
     while (cutoff <= MAX_CUTOFF) : (cutoff += 1) {
