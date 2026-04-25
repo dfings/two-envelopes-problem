@@ -25,11 +25,15 @@ fn single_trial(cutoff: Int) -> Float {
   }
 }
 
-fn get_multi_trial_total(cutoff: Int, remaining: Int, acc: Float) -> Float {
+fn get_multi_trial_total(cutoff: Int, remaining: Int, total: Float) -> Float {
   case remaining {
-    0 -> acc
+    0 -> total
     _ ->
-      get_multi_trial_total(cutoff, remaining - 1, acc +. single_trial(cutoff))
+      get_multi_trial_total(
+        cutoff,
+        remaining - 1,
+        total +. single_trial(cutoff),
+      )
   }
 }
 
