@@ -25,39 +25,22 @@ fn single_trial(cutoff: Int) -> Float {
   }
 }
 
-fn get_multi_trial_total(cutoff: Int, remaining: Int, total: Float) -> Float {
-  case remaining {
-    0 -> total
-    _ ->
-      get_multi_trial_total(
-        cutoff,
-        remaining - 1,
-        total +. single_trial(cutoff),
-      )
-  }
-}
-
 fn multi_trial(cutoff: Int) -> Float {
-  let total = get_multi_trial_total(cutoff, num_trials, 0.0)
+  let total =
+    int.range(from: 0, to: num_trials, with: 0.0, run: fn(total, _) {
+      total +. single_trial(cutoff)
+    })
   total /. int.to_float(num_trials)
 }
 
-fn cutoff_trials(cutoff: Int, remaining: Int) -> Nil {
-  case remaining {
-    0 -> Nil
-    _ -> {
-      let expected_value = multi_trial(cutoff)
-      io.println(
-        "cutoff="
-        <> int.to_string(cutoff)
-        <> ", expected_value="
-        <> float.to_string(expected_value),
-      )
-      cutoff_trials(cutoff + 1, remaining - 1)
-    }
-  }
-}
-
 pub fn main() -> Nil {
-  cutoff_trials(0, 2 * prior_lower_max + 1)
+  int.range(from: 0, to: 2 * prior_lower_max + 1, with: Nil, run: fn(_, i) {
+    let expected_value = multi_trial(i)
+    io.println(
+      "cutoff="
+      <> int.to_string(i)
+      <> ", expected_value="
+      <> float.to_string(expected_value),
+    )
+  })
 }
