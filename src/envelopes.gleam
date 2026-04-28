@@ -1,5 +1,6 @@
-// brew install gleam
-// gleam run
+// $ brew install gleam
+// $ gleam add gleam_stdlib
+// $ gleam run
 
 import gleam/float
 import gleam/int
