@@ -15,7 +15,7 @@ const num_trials = 10_000
 fn single_trial(cutoff: Int) -> Float {
   let lower_value = float.random() *. prior_lower_max_f
   let higher_value = lower_value *. 2.0
-  let #(chosen_value, other_value) = case float.random() <. 0.5 {
+  let #(chosen_value, other_value) = case int.random(2) == 0 {
     True -> #(lower_value, higher_value)
     False -> #(higher_value, lower_value)
   }
