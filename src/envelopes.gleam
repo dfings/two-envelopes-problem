@@ -27,20 +27,19 @@ fn single_trial(cutoff: Int) -> Float {
 
 fn multi_trial(cutoff: Int) -> Float {
   let total =
-    int.range(from: 0, to: num_trials, with: 0.0, run: fn(total, _) {
-      total +. single_trial(cutoff)
+    int.range(from: 0, to: num_trials, with: 0.0, run: fn(acc, _) {
+      acc +. single_trial(cutoff)
     })
   total /. int.to_float(num_trials)
 }
 
 pub fn main() -> Nil {
   int.range(from: 0, to: 2 * prior_lower_max + 1, with: Nil, run: fn(_, i) {
-    let expected_value = multi_trial(i)
     io.println(
       "cutoff="
       <> int.to_string(i)
       <> ", expected_value="
-      <> float.to_string(expected_value),
+      <> float.to_string(multi_trial(i)),
     )
   })
 }
