@@ -1,10 +1,11 @@
 // $ brew install gleam
-// $ gleam add gleam_stdlib
+// $ gleam add gleam_stdlib gleam_yielder
 // $ gleam run
 
 import gleam/float
 import gleam/int
 import gleam/io
+import gleam/yielder.{fold, map, range}
 
 const prior_lower_max = 100
 
@@ -27,9 +28,9 @@ fn single_trial(cutoff: Int) -> Float {
 
 fn multi_trial(cutoff: Int) -> Float {
   let total =
-    int.range(from: 0, to: num_trials, with: 0.0, run: fn(acc, _) {
-      acc +. single_trial(cutoff)
-    })
+    range(from: 0, to: num_trials)
+    |> map(fn(_) { single_trial(cutoff) })
+    |> fold(0.0, float.add)
   total /. int.to_float(num_trials)
 }
 
