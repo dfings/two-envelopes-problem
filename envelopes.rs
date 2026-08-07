@@ -1,4 +1,5 @@
-// $ brew install rust
+// brew's rustup is keg-only, so add "$(brew --prefix rustup)/bin" to PATH.
+// $ brew install rustup && rustup default stable
 // $ cargo build --release
 // $ ./target/release/envelopes_rs
 

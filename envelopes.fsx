@@ -1,7 +1,6 @@
 (*
- $ brew install fsharp
- $ fsharpc -o envelopes_fs.exe envelopes.fs
- $ mono envelopes_fs.exe
+ $ brew install dotnet
+ $ dotnet fsi envelopes.fsx
 *)
 
 let rng = System.Random()

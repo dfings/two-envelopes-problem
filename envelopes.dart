@@ -1,6 +1,6 @@
 #!/usr/bin/env dart
-// $ brew tap dart-lang/dart
 // $ brew install dart
+// $ ./envelopes.dart
 
 import 'dart:math';
 

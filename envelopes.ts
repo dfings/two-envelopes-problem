@@ -1,18 +1,8 @@
-#!/usr/bin/env deno run
+#!/usr/bin/env ts-node
 
-// $ brew install typescript
+// $ npm install -g typescript ts-node
 // $ echo '{"compilerOptions": {"noImplicitAny": true}}' > tsconfig.json
-// Deno:
-// $ brew install deno
-// Node:
-// $ npm install -g ts-node
-// $ npm install -g typescript
-
 // $ ./envelopes.ts
-// or
-// $ tsc envelopes.ts --outFile envelopes.ts.js
-// $ deno run ./envelopes.ts.js
-// $ node ./envelopes.ts.js
 
 const NUM_TRIALS = 10000;
 const PRIOR_LOWER_MAX = 100;

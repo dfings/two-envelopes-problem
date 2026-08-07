@@ -18,3 +18,11 @@ Cargo.lock
 
 # Gleam
 build/
+
+# Scala CLI
+.bsp/
+.scala-build/
+
+# Zig
+.zig-cache/
+zig-out/

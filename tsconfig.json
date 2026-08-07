@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
     "noImplicitAny": true
-  }
+  },
+  // The bazel-* symlinks point into bazel's execroot, which holds a second copy
+  // of envelopes.ts. Without this, tsc sees every declaration twice.
+  "exclude": ["bazel-*"]
 }

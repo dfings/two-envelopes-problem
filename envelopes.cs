@@ -1,6 +1,5 @@
-// $ brew install mono
-// $ mcs -out:envelopes_cs.exe envelopes.cs
-// $ mono envelopes_cs.exe
+// $ brew install dotnet
+// $ dotnet run envelopes.cs
 
 using System;
 

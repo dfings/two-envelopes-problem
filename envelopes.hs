@@ -1,7 +1,16 @@
--- $ brew cask install haskell-platform
+-- System.Random is not a GHC boot library, so it needs installing separately.
+-- This is the one file here with a dependency outside its language's stdlib.
+-- $ brew install ghc cabal-install
+-- $ cabal update && cabal install --lib random
 -- $ runhaskell envelopes.hs
 -- or
 -- $ ghc -o envelopes_hs envelopes.hs; ./envelopes_hs
+--
+-- `cabal install --lib` writes a global package environment at
+-- ~/.ghc/<arch>/environments/default, which changes what every ghc on the
+-- machine can import. A self-contained alternative is to make this a cabal
+-- script instead: a `#!/usr/bin/env cabal` shebang plus a
+-- `{- cabal: build-depends: base, random -}` block, run with ./envelopes.hs.
 
 import System.Random
 
@@ -37,11 +46,11 @@ randomIntList bounds len = do
 main = do
   loop 0
   where loop cutoff = do
-        if cutoff <= maxCutoff then do
-          envelopes <- randomIntList (0, 1) numTrials
-          lowerValues <- randomIntList (0, priorLowerMax) numTrials
-          let expectedValue = multiTrial envelopes lowerValues cutoff
-          putStrLn $ "cutoff=" ++ show cutoff ++ ", expectedValue=" ++ show expectedValue
-          loop (cutoff + 1)
-        else
-          return ()
+          if cutoff <= maxCutoff then do
+            envelopes <- randomIntList (0, 1) numTrials
+            lowerValues <- randomIntList (0, priorLowerMax) numTrials
+            let expectedValue = multiTrial envelopes lowerValues cutoff
+            putStrLn $ "cutoff=" ++ show cutoff ++ ", expectedValue=" ++ show expectedValue
+            loop (cutoff + 1)
+          else
+            return ()
