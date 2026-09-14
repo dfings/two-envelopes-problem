@@ -1,4 +1,4 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env node
 
 // $ npm install -g typescript ts-node
 // $ echo '{"compilerOptions": {"noImplicitAny": true}}' > tsconfig.json
